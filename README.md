@@ -8,7 +8,7 @@ The CDP4 Reports repository contains CDP4 report definitions and templates that 
 
 The Concurrent Design Platform 4 (CDP4) Integrated Modelling Environemnt (IME) Community Editition (CE) is the RHEA Group open source Concurrent Design desktop application and Microsoft Excel integration compliant with ECSS-E-TM-10-25 Annex A and Annex C. The CDP4-IME makes use of a plugin framework, the end-user functionality is implemented in CDP4 plugins that are loaded at run-time. This makes it straightforward to package, distribute and update the environment.
 
-To read more about the CDP4 Desktop application to perform concurrent design please read our documentation at http://cdp4docs.rheagroup.com and watch the CDP4 instruction videos on (YouTube)[https://www.youtube.com/watch?v=bftyOgwba4E&list=PL_4pFoUvQUgaZWOdXAS9xvOdz9D_qn5PU]
+To read more about the CDP4 Desktop application to perform concurrent design please read our documentation at http://cdp4docs.rheagroup.com and watch the CDP4 instruction videos on [YouTube(https://www.youtube.com/watch?v=bftyOgwba4E&list=PL_4pFoUvQUgaZWOdXAS9xvOdz9D_qn5PU)
 
 You can download the CDP4-IME installer [here](https://github.com/RHEAGROUP/CDP4-IME-Community-Edition/releases)
 
