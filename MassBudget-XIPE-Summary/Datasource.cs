@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DataSource.cs" company="RHEA System S.A.">
-//    Copyright (c) 2015-2020 RHEA System S.A.
+//    Copyright (c) 2015-2021 RHEA System S.A.
 //
 //    Author: Alexander van Delft, Sam Gerené, Alex Vorobiev
 //
@@ -129,11 +129,16 @@ public class MyDataSource : OptionDependentDataCollector
 		Variables.SetVariables(option);
 
 		// Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
-		// comply to the Hierarchy of categories defined here.
-		// In this case all elements that contain a Systems category and child elements that contain
-		// Subsystems category are selected in the datasource.
-		// The fieldnames in the result DataSource are overwritten 
-		// (second parameter of AddLevel method).
+		// comply to the Hierarchy of categories defined here:
+		//
+		// - Missions
+		//   | Segments
+		//     | Systems [1..5 nesting levels]
+		//       | Subsystems
+		//
+        // In case there are multiple nested Equipment levels in the model, the deepest level is selected
+        // as the source for the parameter values.
+		// The fieldnames in the result DataSource are set explicitly (second parameter of AddLevel method).
 		var functionHierarchy = new CategoryDecompositionHierarchy
 	        .Builder(this.Iteration)
 			.AddLevel("Missions")
@@ -143,11 +148,16 @@ public class MyDataSource : OptionDependentDataCollector
 	        .Build();
 
 		// Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
-		// comply to the Hierarchy of categories defined here.
-		// In this case all elements that contain a Elements Category and child elements that contain
-		// Equipment Category are selected in the datasource.
-		// The fieldnames in the result DataSource are overwritten 
-		// (second parameter of AddLevel method) to match the functionHierarchy's result columnnames.
+		// comply to the Hierarchy of categories defined here:
+		//
+		// - Missions
+		//   | Segments
+		//     | Systems [1..5 nesting levels]
+		//       | Subsystems
+		//
+        // In case there are multiple nested Elements levels in the model, the deepest level is selected
+        // as the source for the parameter values.
+		// The fieldnames in the result DataSource are set explicitly (second parameter of AddLevel method).
 		var productHierarchy = new CategoryDecompositionHierarchy
 	        .Builder(this.Iteration)
 			.AddLevel("Missions")
@@ -175,19 +185,26 @@ public class MyDataSource : OptionDependentDataCollector
 		// Create the DataSet that will be returned by this CreateDataObject method.
 		var dataSet = new DataSet();
 
+		resultDataSource.Columns.Add("MassWithoutExtraMargin", typeof(double));
+
 		// Set Extra Mass Margin data if found on the second Element level.
 		foreach (DataRow dataRow in resultDataSource.Rows)
 		{
-			if ((bool)dataRow["Products"] == true 
-				&& dataRow["SystemName_2_MassMargin"] != DBNull.Value
-				&& (double)dataRow["SystemName_2_MassMargin"] != 0D)
+			dataRow["MassWithoutExtraMargin"] = dataRow["Mass"];
+
+			if (resultDataSource.Columns.Contains("SystemName_2_MassMargin")) 
 			{
-				dataRow["HasExtraMassMargin"] = true;	
-				dataRow["ExtraMassMargin"] = (double)dataRow["SystemName_2_MassMargin"] / 100;
-				dataRow["Mass"] = (double)dataRow["Mass"] * (1D + (double)dataRow["ExtraMassMargin"]);
+				if ((bool)dataRow["Products"] == true 
+					&& dataRow["SystemName_2_MassMargin"] != DBNull.Value
+					&& (double)dataRow["SystemName_2_MassMargin"] != 0D)
+				{
+					dataRow["HasExtraMassMargin"] = true;	
+					dataRow["ExtraMassMargin"] = (double)dataRow["SystemName_2_MassMargin"] / 100;
+					dataRow["Mass"] = (double)dataRow["Mass"] * (1D + (double)dataRow["ExtraMassMargin"]);
+				}
 			}
 		}
-
+		
 		// Find the data rows that contain a Segments name that is equal to the SpaceSegmentName set in the top of this file
 		// and add that table to the DataSet.
 		foreach (DataRow dataRow in segmentsTable.Rows) 
@@ -333,18 +350,18 @@ public class MyParameters : ReportingParameters
 		var launcherAdapterMass =  string.IsNullOrWhiteSpace(Variables.LauncherAdapterPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
     			Variables.LauncherAdapterPath, 
     			Variables.NestedParameters)
-    		.First();
+    		.FirstOrDefault();
     	list.Add(new ReportingParameter(
 					"LauncherAdapterMass", 
 					typeof(double),
-					null
+					launcherAdapterMass
 		));	
 
 		// Get the fuel mass using its Path property from the ProductTree.
 		var fuelMass =  string.IsNullOrWhiteSpace(Variables.FuelMassPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
     			Variables.FuelMassPath, 
     			Variables.NestedParameters)
-    		.First();
+    		.FirstOrDefault();
     	list.Add(new ReportingParameter(
 					"FuelMass", 
 					typeof(double), 
@@ -355,7 +372,7 @@ public class MyParameters : ReportingParameters
 		var oxidizerMass = string.IsNullOrWhiteSpace(Variables.OxidizerMassPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
     			Variables.OxidizerMassPath, 
     			Variables.NestedParameters)
-    		.First();
+    		.FirstOrDefault();
     	list.Add(new ReportingParameter(
 					"OxidizerMass", 
 					typeof(double), 
@@ -377,7 +394,7 @@ public class MyParameters : ReportingParameters
 		var propellantMass = string.IsNullOrWhiteSpace(Variables.PropellantMassPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
     			Variables.PropellantMassPath, 
     			Variables.NestedParameters)
-    		.First();
+    		.FirstOrDefault();
 		list.Add(new ReportingParameter(
 					"PropellantMass", 
 					typeof(double), 

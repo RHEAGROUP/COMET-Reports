@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DataSource.cs" company="RHEA System S.A.">
-//    Copyright (c) 2015-2020 RHEA System S.A.
+//    Copyright (c) 2015-2021 RHEA System S.A.
 //
 //    Author: Alexander van Delft, Sam Gerené, Alex Vorobiev
 //
@@ -86,35 +86,44 @@ public class MyDataSource : OptionDependentDataCollector
 		// Get the tree of NestedElements for the selected Option.
 		var nestedElementTree = new NestedElementTreeGenerator().Generate(option).ToList();
 
-		// Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
-		// comply to the Hierarchy of categories defined here.
-		// The fieldnames in the result DataSource are overwritten 
-		// (second parameter of AddLevel method).
-		// The extra parameter in the 3rd level (Systems) sets the maximum recursion level of the Category.
-		// In this case 5 SystemName columns will be created.
-		var functionHierarchy = new CategoryDecompositionHierarchy
-			.Builder(this.Iteration)
-			.AddLevel("Missions")
-			.AddLevel("Segments")
-			.AddLevel("Systems", "SystemName", 5)
-			.AddLevel("Subsystems", "SubsystemName")
-			.Build();
+        // Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
+        // comply to the Hierarchy of categories defined here:
+        //
+        // - Missions
+        //   | Segments
+        //     | Systems [1..5 nesting levels]
+        //       | Subsystems
+        //
+        // In case there are multiple nested Equipment levels in the model, the deepest level is selected
+        // as the source for the parameter values.
+        // The fieldnames in the result DataSource are set explicitly (second parameter of AddLevel method).
+        var functionHierarchy = new CategoryDecompositionHierarchy
+            .Builder(this.Iteration)
+            .AddLevel("Missions")
+            .AddLevel("Segments")
+            .AddLevel("Systems", "SystemName", 5)
+            .AddLevel("Subsystems", "SubsystemName")
+            .Build();
 
-		// Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
-		// comply to the Hierarchy of categories defined here.
-		// In this case all elements that contain a Elements Category and child elements that contain
-		// Equipment Category are selected in the datasource.
-		// The fieldnames in the result DataSource are overwritten 
-		// (second parameter of AddLevel method) to match the functionHierarchy's result columnnames.
-		// The extra parameter in the 3rd level (Elements) sets the maximum recursion level of the Category.
-		// In this case 5 SystemName columns will be created.
-		var productHierarchy = new CategoryDecompositionHierarchy
-			.Builder(this.Iteration)
-			.AddLevel("Missions")
-			.AddLevel("Segments")
-			.AddLevel("Elements", "SystemName", 5)
-			.AddLevel("Equipment", "SubsystemName")
-			.Build();
+        // Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
+        // comply to the Hierarchy of categories defined here:
+        //
+        // - Missions
+        //   | Segments
+        //     | Systems [1..5 nesting levels]
+        //       | Subsystems
+        //
+        // In case there are multiple nested Elements levels in the model, the deepest level is selected
+        // as the source for the parameter values.
+        // The fieldnames in the result DataSource are set explicitly (second parameter of AddLevel method).
+        var productHierarchy = new CategoryDecompositionHierarchy
+            .Builder(this.Iteration)
+            .AddLevel("Missions")
+            .AddLevel("Segments")
+            .AddLevel("Elements", "SystemName", 5)
+            .AddLevel("Equipment", "SubsystemName")
+            .Build();
+
 
 		// Build a DataTable for the productHierarchy level (Product level)
 		// The third parameter in the GetTable method indicates that elements that do not contain 

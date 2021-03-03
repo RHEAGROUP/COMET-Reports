@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DataSource.cs" company="RHEA System S.A.">
-//    Copyright (c) 2015-2020 RHEA System S.A.
+//    Copyright (c) 2015-2021 RHEA System S.A.
 //
 //    Author: Alexander van Delft, Sam Gerené, Alex Vorobiev
 //
@@ -33,6 +33,7 @@ using System.Text;
 
 using CDP4Reporting.DataCollection;
 using CDP4Reporting.Parameters;
+using CDP4Reporting.Utilities;
 
 using CDP4Composition.Navigation;
 
@@ -77,10 +78,15 @@ public class MyDataSource : OptionDependentDataCollector
 
 		// Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
 		// comply to the Hierarchy of categories defined here.
-		// In this case all elements that contain a Systems category and child elements that contain
-		// Subsystems category are selected in the datasource.
-		// The fieldnames in the result DataSource are overwritten 
-		// (second parameter of AddLevel method).
+		// The Category hierarchy of elements in the product tree should be like:
+		//
+		//   Missions 
+		//   | Segments
+		//     | Elements [1..5 nesting levels]
+		//       | Equipment
+		//
+		// In case there are multiple nested Equipment levels in the model, the deepest level is selected
+		// as the source for the parameter values.
 		var productHierarchy = new CategoryDecompositionHierarchy
 	        .Builder(this.Iteration)
 	        .AddLevel("Missions")
