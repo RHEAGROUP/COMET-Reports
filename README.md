@@ -1,12 +1,12 @@
-<img src="https://github.com/RHEAGROUP/CDP4-Reports/raw/master/CDP-Community-Edition.png" width="250">
+<img src="https://github.com/RHEAGROUP/CDP4-Reports/raw/master/COMET.jpg" width="250">
 
-# CDP4-Reports
+# COMET-Reports
 
-The CDP4 Reports repository contains CDP4 report definitions and templates that can be used by the CDP4 Reporting plugin of the [CDP4-IME]. The CDP4 Reporting plugin is used to create in-app reports and budgets such as a **Mass Budget** and a **Power Budget** of a complex system such as a Satellite, Ship, or Vehicle.
+The COMET Reports repository contains COMET report definitions and templates that can be used by the COMET Reporting plugin of the [COMET-IME]. The COMET Reporting plugin is used to create in-app reports and budgets such as a **Mass Budget** and a **Power Budget** of a complex system such as a Satellite, Ship, or Vehicle.
 
-## CDP4-IME
+## COMET-IME
 
-The Concurrent Design Platform 4 (CDP4) Integrated Modelling Environemnt (IME) Community Editition (CE) is the RHEA Group open source Concurrent Design desktop application and Microsoft Excel integration compliant with ECSS-E-TM-10-25 Annex A and Annex C. The CDP4-IME makes use of a plugin framework, the end-user functionality is implemented in CDP4 plugins that are loaded at run-time. This makes it straightforward to package, distribute and update the environment.
+The COMET Integrated Modelling Environemnt (IME) Community Editition (CE) is the RHEA Group open source Concurrent Design desktop application and Microsoft Excel integration compliant with ECSS-E-TM-10-25 Annex A and Annex C. The CDP4-IME makes use of a plugin framework, the end-user functionality is implemented in CDP4 plugins that are loaded at run-time. This makes it straightforward to package, distribute and update the environment.
 
 To read more about the CDP4 Desktop application to perform concurrent design please read our documentation at http://cdp4docs.rheagroup.com and watch the CDP4 instruction videos on [YouTube(https://www.youtube.com/watch?v=bftyOgwba4E&list=PL_4pFoUvQUgaZWOdXAS9xvOdz9D_qn5PU)
 
