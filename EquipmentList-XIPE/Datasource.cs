@@ -76,11 +76,11 @@ public class MyDataSource : OptionDependentDataCollector
 		// Get the tree of NestedElements for the selected Option.
 		var nestedElementTree = new NestedElementTreeGenerator().Generate(option).ToList();
 
-		// Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
+		// Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that
 		// comply to the Hierarchy of categories defined here.
 		// The Category hierarchy of elements in the product tree should be like:
 		//
-		//   Missions 
+		//   Missions
 		//   | Segments
 		//     | Elements [1..5 nesting levels]
 		//       | Equipment
@@ -94,9 +94,9 @@ public class MyDataSource : OptionDependentDataCollector
 			.AddLevel("Elements", 5)
 	        .AddLevel("Equipment")
 	        .Build();
-	
+
 		// Build a DataTable for the productHierarchy level (Product level)
-	    var resultDataSource = 
+	    var resultDataSource =
 	        new DataCollectorNodesCreator<MainDataRow>()
 	        	.GetTable(productHierarchy, nestedElementTree);
 
@@ -108,11 +108,11 @@ public class MyDataSource : OptionDependentDataCollector
 
 		// Find the data rows that contain a Segments name that is equal to the SpaceSegmentName set in the top of this file
 		// and add that table to the DataSet.
-		foreach (DataRow dataRow in segmentsTable.Rows) 
+		foreach (DataRow dataRow in segmentsTable.Rows)
 		{
 			var segment = dataRow["Segments"].ToString();
-				
-			if ((segment) == Variables.SpaceSegmentName) 
+
+			if ((segment) == Variables.SpaceSegmentName)
 			{
 				var newView = new DataView(resultDataSource);
 				newView.RowFilter = "Segments = '" + segment + "'";
@@ -133,14 +133,14 @@ public class MyDataSource : OptionDependentDataCollector
 public class MainDataRow : DataCollectorRow
 {
 	/// <summary>
-	/// The Parameter classes. 
+	/// The Parameter classes.
 	/// Need to be public.
 	/// </summary>
 	[DefinedThingShortName("m", "MassWithoutMargin")]
 	public DataCollectorDoubleParameter<MainDataRow> parameterMass {get; set;}
 
 	[DefinedThingShortName("mass_margin", "MassMargin")]
-	public DataCollectorDoubleParameter<MainDataRow> parameterMassMargin {get; set;}	
+	public DataCollectorDoubleParameter<MainDataRow> parameterMassMargin {get; set;}
 
 	[DefinedThingShortName("n_items")]
 	public DataCollectorDoubleParameter<MainDataRow> parameterNumberOfItems {get; set;}
@@ -172,7 +172,7 @@ public class MainDataRow : DataCollectorRow
 
 	/// <summary>
 	/// The implementation of the OwnerShortName property/column in the result datasource.
-	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class, 
+	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class,
 	/// of which this class is derived from.
 	/// this.ElementBaseOwner is the Owner DomainOfExpertise of the this.ElementBase property
 	/// </summary>
@@ -183,31 +183,31 @@ public class MainDataRow : DataCollectorRow
 
 	/// <summary>
 	/// The implementation of the OwnerName property/column in the result datasource.
-	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class, 
+	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class,
 	/// of which this class is derived from.
 	/// this.ElementBaseOwner is the Owner DomainOfExpertise of the this.ElementBase property
 	/// </summary>
 	public string OwnerName
 	{
 	    get { return this.ElementBaseOwner.Name; }
-	}         
-}        
+	}
+}
 
 /// <summary>
 /// A class that is used to build Report Parameters and optional a specific filter string at the
-/// report level. 
+/// report level.
 /// </summary>
-public class MyParameters : ReportingParameters 
+public class MyParameters : ReportingParameters
 {
 	/// <summary>
-	/// Creates a list of report reporting parameter that should dynamically be added to the 
+	/// Creates a list of report reporting parameter that should dynamically be added to the
 	/// Report Designer's report parameter list.
 	/// </summary>
 	public override IEnumerable<IReportingParameter> CreateParameters(object dataSource, IDataCollector dataCollector) {
 	    var list = new List<IReportingParameter>();
 	    var optionDependentDataCollector = dataCollector as IOptionDependentDataCollector;
-		
-		// Get the selected option. 
+
+		// Get the selected option.
 		var optionName = optionDependentDataCollector.SelectedOption.Name;
 
 		// Create a dynamic parameter for use in the report header
