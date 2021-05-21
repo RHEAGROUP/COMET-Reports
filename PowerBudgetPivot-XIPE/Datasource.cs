@@ -197,29 +197,29 @@ public class RowRepresentation : DataCollectorRow
 	/// </summary>
 
 	[DefinedThingShortName("P_on", "P_on")]
-	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterOn {get; set;}
+	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterOn { get; set; }
 
 	[DefinedThingShortName("P_stby", "P_stby")]
-	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterStby {get; set;}
+	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterStby { get; set; }
 
 	[DefinedThingShortName("P_peak", "P_peak")]
-	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterPeak {get; set;}
+	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterPeak { get; set; }
 
 	[DefinedThingShortName("P_duty_cyc", "P_duty_cyc")]
-	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterDutyCyc {get; set;}
+	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterDutyCyc { get; set; }
 
 	[DefinedThingShortName("P_mean", "P_mean")]
-	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterMean {get; set;}
+	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterMean { get; set; }
 
 	/// <summary>
 	/// The Category classes.
 	/// Need to be public.
 	/// </summary>
 	[DefinedThingShortName("Functions")]
-	public DataCollectorCategory<RowRepresentation> functionsCategory {get; set;}
+	public DataCollectorCategory<RowRepresentation> functionsCategory { get; set; }
 
 	[DefinedThingShortName("Products")]
-	public DataCollectorCategory<RowRepresentation> productsCategory {get; set;}
+	public DataCollectorCategory<RowRepresentation> productsCategory { get; set; }
 
 	/// <summary>
 	/// The implementation of the OwnerShortName property/column in the result datasource.
@@ -254,8 +254,7 @@ public class RowRepresentation : DataCollectorRow
 
 	// Gets the order in which the ParameterName columns need to be ordered in the result pivot.
 	// Is set after DataTable creation
-	public int Order { get { return 0; }}
-
+	public int Order { get { return 0; } }
 }
 
 /// <summary>
@@ -325,4 +324,3 @@ public class MyParameters : ReportingParameters
 		return list;
 	}
 }
-

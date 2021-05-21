@@ -237,29 +237,29 @@ public class RowRepresentation : DataCollectorRow
 	/// Need to be public.
 	/// </summary>
 	[DefinedThingShortName("m", "MassWithoutMargin")]
-	public DataCollectorDoubleParameter<RowRepresentation> parameterMass {get; set;}
+	public DataCollectorDoubleParameter<RowRepresentation> parameterMass { get; set; }
 
 	[DefinedThingShortName("mass_margin", "MassMargin")]
 	[CollectParentValues]
-	public DataCollectorDoubleParameter<RowRepresentation> parameterMassMargin {get; set;}
+	public DataCollectorDoubleParameter<RowRepresentation> parameterMassMargin { get; set; }
 
 	[DefinedThingShortName("n_items")]
-	public DataCollectorDoubleParameter<RowRepresentation> parameterNumberOfItems {get; set;}
+	public DataCollectorDoubleParameter<RowRepresentation> parameterNumberOfItems { get; set; }
 
 	/// <summary>
 	/// The Category classes.
 	/// Need to be public.
 	/// </summary>
 	[DefinedThingShortName("Functions")]
-	public DataCollectorCategory<RowRepresentation> functionsCategory {get; set;}
+	public DataCollectorCategory<RowRepresentation> functionsCategory { get; set; }
 
 	[DefinedThingShortName("Products")]
-	public DataCollectorCategory<RowRepresentation> productsCategory {get; set;}
+	public DataCollectorCategory<RowRepresentation> productsCategory { get; set; }
 
 	// Gets the number of items and returns 1 if it is 0
 	public double NumberOfItems
 	{
-		get { return this.parameterNumberOfItems.Value == 0D ? 1D :  this.parameterNumberOfItems.Value; }
+		get { return this.parameterNumberOfItems.Value == 0D ? 1D : this.parameterNumberOfItems.Value; }
 	}
 
 	/// <summary>
@@ -347,7 +347,7 @@ public class MyParameters : ReportingParameters
 		list.Add(optionNameParameter);
 
 		// Get the launcher mass using its Path property from the ProductTree.
-		var launcherAdapterMass =  string.IsNullOrWhiteSpace(Variables.LauncherAdapterPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
+		var launcherAdapterMass = string.IsNullOrWhiteSpace(Variables.LauncherAdapterPath) ? 0D : option.GetNestedParameterValuesByPath<double>(
     			Variables.LauncherAdapterPath,
     			Variables.NestedParameters)
     		.FirstOrDefault();
@@ -358,7 +358,7 @@ public class MyParameters : ReportingParameters
 		));
 
 		// Get the fuel mass using its Path property from the ProductTree.
-		var fuelMass =  string.IsNullOrWhiteSpace(Variables.FuelMassPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
+		var fuelMass = string.IsNullOrWhiteSpace(Variables.FuelMassPath) ? 0D : option.GetNestedParameterValuesByPath<double>(
     			Variables.FuelMassPath,
     			Variables.NestedParameters)
     		.FirstOrDefault();
@@ -369,7 +369,7 @@ public class MyParameters : ReportingParameters
 		));
 
 		// Get the oxidizer mass using its Path property from the ProductTree.
-		var oxidizerMass = string.IsNullOrWhiteSpace(Variables.OxidizerMassPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
+		var oxidizerMass = string.IsNullOrWhiteSpace(Variables.OxidizerMassPath) ? 0D : option.GetNestedParameterValuesByPath<double>(
     			Variables.OxidizerMassPath,
     			Variables.NestedParameters)
     		.FirstOrDefault();
@@ -380,7 +380,7 @@ public class MyParameters : ReportingParameters
 		));
 
 		// Get the pressurant mass using its Path property from the ProductTree.
-		var pressurantMass = string.IsNullOrWhiteSpace(Variables.PressurantMassPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
+		var pressurantMass = string.IsNullOrWhiteSpace(Variables.PressurantMassPath) ? 0D : option.GetNestedParameterValuesByPath<double>(
     			Variables.PressurantMassPath,
     			Variables.NestedParameters)
     		.First();
@@ -391,7 +391,7 @@ public class MyParameters : ReportingParameters
 		));
 
 		// Get the propellant mass using its Path property from the ProductTree.
-		var propellantMass = string.IsNullOrWhiteSpace(Variables.PropellantMassPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
+		var propellantMass = string.IsNullOrWhiteSpace(Variables.PropellantMassPath) ? 0D : option.GetNestedParameterValuesByPath<double>(
     			Variables.PropellantMassPath,
     			Variables.NestedParameters)
     		.FirstOrDefault();
@@ -468,4 +468,3 @@ public class MyParameters : ReportingParameters
 		return list;
 	}
 }
-

@@ -137,13 +137,13 @@ public class MainDataRow : DataCollectorRow
 	/// Need to be public.
 	/// </summary>
 	[DefinedThingShortName("m", "MassWithoutMargin")]
-	public DataCollectorDoubleParameter<MainDataRow> parameterMass {get; set;}
+	public DataCollectorDoubleParameter<MainDataRow> parameterMass { get; set; }
 
 	[DefinedThingShortName("mass_margin", "MassMargin")]
-	public DataCollectorDoubleParameter<MainDataRow> parameterMassMargin {get; set;}
+	public DataCollectorDoubleParameter<MainDataRow> parameterMassMargin { get; set; }
 
 	[DefinedThingShortName("n_items")]
-	public DataCollectorDoubleParameter<MainDataRow> parameterNumberOfItems {get; set;}
+	public DataCollectorDoubleParameter<MainDataRow> parameterNumberOfItems { get; set; }
 
 	/// <summary>
 	/// The implementation of the Mass property/column in the result datasource
@@ -221,4 +221,3 @@ public class MyParameters : ReportingParameters
 		return list;
 	}
 }
-
