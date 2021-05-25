@@ -363,7 +363,7 @@ public class MyParameters : ReportingParameters
     			Variables.NestedParameters)
     		.FirstOrDefault();
     	list.Add(new ReportingParameter(
-					"FuelMass",
+					"CPROP Fuel Mass",
 					typeof(double),
 					fuelMass
 		));
