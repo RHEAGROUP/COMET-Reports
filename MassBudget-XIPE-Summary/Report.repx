@@ -9,7 +9,7 @@
     <Item6 Ref="11" Description="Launcher Adapter Mass" ValueInfo="78" Name="dyn_Launcher_Adapter_Mass" Type="#Ref-5" />
     <Item7 Ref="12" Description="CPROP Fuel Mass" ValueInfo="0" Name="dyn_CPROP_Fuel_Mass" Type="#Ref-5" />
     <Item8 Ref="13" Description="CPROP Oxidizer Mass" ValueInfo="0" Name="dyn_CPROP_Oxidizer_Mass" Type="#Ref-5" />
-    <Item9 Ref="14" Description="PressurantMass" ValueInfo="0" Name="dyn_PressurantMass" Type="#Ref-5" />
+    <Item9 Ref="14" Description="CPROP Pressurant Mass" ValueInfo="0" Name="dyn_CPROP_Pressurant_Mass" Type="#Ref-5" />
     <Item10 Ref="15" Description="PropellantMass" ValueInfo="0" Name="dyn_PropellantMass" Type="#Ref-5" />
     <Item11 Ref="17" Description="AOGNC" ValueSourceSettings="#Ref-16" ValueInfo="Product" Name="dyn_AOGNC" />
     <Item12 Ref="19" Description="COM" ValueSourceSettings="#Ref-18" ValueInfo="Product" Name="dyn_COM" />
@@ -117,7 +117,7 @@
             <Item1 Ref="89" ControlType="XRLabel" Name="label42" TextFormatString="{0:n2}" Multiline="true" TextAlignment="MiddleRight" SizeF="144,24" LocationFloat="408,0" Dpi="96" Font="Arial, 9.75pt, style=Bold, charSet=0" Padding="0,5,0,0,96">
               <Summary Ref="90" Running="Report" />
               <ExpressionBindings>
-                <Item1 Ref="91" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([NumberOfItems] * [Mass]) * (1 + ?HarnessMargin) * (1 + ?SystemMargin) +&#xD;&#xA;?dyn_CPROP_Fuel_Mass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_CPROP_Oxidizer_Mass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_PressurantMass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_PropellantMass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_Launcher_Adapter_Mass&#xD;&#xA;" />
+                <Item1 Ref="91" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([NumberOfItems] * [Mass]) * (1 + ?HarnessMargin) * (1 + ?SystemMargin) +&#xD;&#xA;?dyn_CPROP_Fuel_Mass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_CPROP_Oxidizer_Mass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_CPROP_Pressurant_Mass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_PropellantMass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_Launcher_Adapter_Mass&#xD;&#xA;" />
               </ExpressionBindings>
               <StylePriority Ref="92" UseFont="false" UsePadding="false" UseTextAlignment="false" />
             </Item1>
@@ -146,7 +146,7 @@
               <Scripts Ref="104" OnPreviewClick="label42_PreviewClick" />
               <Summary Ref="105" Running="Report" />
               <ExpressionBindings>
-                <Item1 Ref="106" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([NumberOfItems] * [Mass]) * (1 + ?HarnessMargin) * (1 + ?SystemMargin) +&#xD;&#xA;?dyn_CPROP_Fuel_Mass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_CPROP_Oxidizer_Mass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_PressurantMass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_PropellantMass*(1+?PropellantMargin)" />
+                <Item1 Ref="106" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([NumberOfItems] * [Mass]) * (1 + ?HarnessMargin) * (1 + ?SystemMargin) +&#xD;&#xA;?dyn_CPROP_Fuel_Mass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_CPROP_Oxidizer_Mass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_CPROP_Pressurant_Mass*(1+?PropellantMargin) +&#xD;&#xA;?dyn_PropellantMass*(1+?PropellantMargin)" />
               </ExpressionBindings>
               <StylePriority Ref="107" UseFont="false" UsePadding="false" UseTextAlignment="false" />
             </Item1>
@@ -197,7 +197,7 @@
             </Item1>
             <Item2 Ref="129" ControlType="XRLabel" Name="label38" TextFormatString="{0:n2}" Multiline="true" Text="label38" TextAlignment="MiddleRight" SizeF="144,24" LocationFloat="408,0" Dpi="96" Padding="2,2,0,0,96">
               <ExpressionBindings>
-                <Item1 Ref="130" EventName="BeforePrint" PropertyName="Text" Expression="?dyn_PressurantMass*(1+?PropellantMargin)&#xD;&#xA;" />
+                <Item1 Ref="130" EventName="BeforePrint" PropertyName="Text" Expression="?dyn_CPROP_Pressurant_Mass*(1+?PropellantMargin)&#xD;&#xA;" />
               </ExpressionBindings>
               <StylePriority Ref="131" UseTextAlignment="false" />
             </Item2>
@@ -210,7 +210,7 @@
           <Controls>
             <Item1 Ref="135" ControlType="XRLabel" Name="label33" TextFormatString="{0:n2}" Multiline="true" Text="label33" TextAlignment="MiddleRight" SizeF="144,24" LocationFloat="408,0" Dpi="96" Padding="2,2,0,0,96">
               <ExpressionBindings>
-                <Item1 Ref="136" EventName="BeforePrint" PropertyName="Text" Expression="?dyn_PressurantMass" />
+                <Item1 Ref="136" EventName="BeforePrint" PropertyName="Text" Expression="?dyn_CPROP_Pressurant_Mass" />
               </ExpressionBindings>
               <StylePriority Ref="137" UseTextAlignment="false" />
             </Item1>
