@@ -385,7 +385,7 @@ public class MyParameters : ReportingParameters
     			Variables.NestedParameters)
     		.First();
     	list.Add(new ReportingParameter(
-					"PressurantMass",
+					"CPROP Pressurant Mass",
 					typeof(double),
 					pressurantMass
 		));
