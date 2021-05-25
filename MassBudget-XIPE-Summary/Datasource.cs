@@ -352,7 +352,7 @@ public class MyParameters : ReportingParameters
     			Variables.NestedParameters)
     		.FirstOrDefault();
     	list.Add(new ReportingParameter(
-					"LauncherAdapterMass",
+					"Launcher Adapter Mass",
 					typeof(double),
 					launcherAdapterMass
 		));
