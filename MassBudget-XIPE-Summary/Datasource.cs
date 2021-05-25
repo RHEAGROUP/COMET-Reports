@@ -446,7 +446,7 @@ public class MyParameters : ReportingParameters
 		var systemsTable = new DataView(dataTable).ToTable(true, "SystemName_1");
 		ReportingParameter systemParameter = null;
 
-		reportFilterString = "(" + reportFilterString + ") AND [SystemName_1] = ?dyn_SystemName";
+		reportFilterString = "(" + reportFilterString + ") AND [SystemName_1] = ?dyn_System_Name";
 
 		// Add a parameter with a lookup value for every "root" System found in the data.
 		foreach (DataRow row in systemsTable.Rows)
@@ -455,7 +455,7 @@ public class MyParameters : ReportingParameters
 			if (systemParameter == null)
 			{
 				systemParameter = new ReportingParameter(
-					"SystemName",
+					"System Name",
 					typeof(string),
 					systemName,
 					reportFilterString
