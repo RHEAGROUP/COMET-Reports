@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<XtraReportsLayoutSerializer SerializerVersion="20.1.8.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.1, Version=20.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="MassBudgetDetailedSummary" DisplayName="Mass Budget Detailed Summary" SnapGridSize="6" SnapGridStepCount="6" SnappingMode="SnapToGrid" ReportUnit="Pixels" Margins="48, 48, 23, 42" PaperKind="A4" PageWidth="794" PageHeight="1123" Version="20.1" FilterString="([ProductFunction] = ?dyn_AOGNC And [OwnerShortName] = 'AOGNC' Or [ProductFunction] = ?dyn_COM And [OwnerShortName] = 'COM' Or [ProductFunction] = ?dyn_CPROP And [OwnerShortName] = 'CPROP' Or [ProductFunction] = ?dyn_DH And [OwnerShortName] = 'DH' Or [ProductFunction] = ?dyn_EPROP And [OwnerShortName] = 'EPROP' Or [ProductFunction] = ?dyn_INS And [OwnerShortName] = 'INS' Or [ProductFunction] = ?dyn_MEC And [OwnerShortName] = 'MEC' Or [ProductFunction] = ?dyn_PWR And [OwnerShortName] = 'PWR' Or [ProductFunction] = ?dyn_RAD And [OwnerShortName] = 'RAD' Or [ProductFunction] = ?dyn_STR And [OwnerShortName] = 'STR' Or [ProductFunction] = ?dyn_SYE And [OwnerShortName] = 'SYE' Or [ProductFunction] = ?dyn_TC And [OwnerShortName] = 'TC') And [SystemName_1] = ?dyn_SystemName" DataMember="MainData" DataSource="#Ref-0" Dpi="96" Font="Arial, 8pt" Padding="2,2,0,0,96">
+<XtraReportsLayoutSerializer SerializerVersion="20.1.8.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.1, Version=20.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="MassBudgetDetailedSummary" DisplayName="Mass Budget Detailed Summary" SnapGridSize="6" SnapGridStepCount="6" SnappingMode="SnapToGrid" ReportUnit="Pixels" Margins="48, 48, 23, 42" PaperKind="A4" PageWidth="794" PageHeight="1123" Version="20.1" FilterString="([ProductFunction] = ?dyn_AOGNC And [OwnerShortName] = 'AOGNC' Or [ProductFunction] = ?dyn_COM And [OwnerShortName] = 'COM' Or [ProductFunction] = ?dyn_CPROP And [OwnerShortName] = 'CPROP' Or [ProductFunction] = ?dyn_DH And [OwnerShortName] = 'DH' Or [ProductFunction] = ?dyn_EPROP And [OwnerShortName] = 'EPROP' Or [ProductFunction] = ?dyn_INS And [OwnerShortName] = 'INS' Or [ProductFunction] = ?dyn_MEC And [OwnerShortName] = 'MEC' Or [ProductFunction] = ?dyn_PWR And [OwnerShortName] = 'PWR' Or [ProductFunction] = ?dyn_RAD And [OwnerShortName] = 'RAD' Or [ProductFunction] = ?dyn_STR And [OwnerShortName] = 'STR' Or [ProductFunction] = ?dyn_SYE And [OwnerShortName] = 'SYE' Or [ProductFunction] = ?dyn_TC And [OwnerShortName] = 'TC') And [SystemName_1] = ?dyn_System_Name" DataMember="MainData" DataSource="#Ref-0" Dpi="96" Font="Arial, 8pt" Padding="2,2,0,0,96">
   <Parameters>
     <Item1 Ref="3" Description="Harness Margin" ValueInfo="0.05" Name="HarnessMargin" Type="#Ref-2" />
     <Item2 Ref="4" Description="System Margin" ValueInfo="0.2" Name="SystemMargin" Type="#Ref-2" />
     <Item3 Ref="6" Description="Propellant Margin" ValueInfo="0.02" Name="PropellantMargin" Type="#Ref-5" />
-    <Item4 Ref="9" Description="SystemName" ValueSourceSettings="#Ref-7" ValueInfo="Spacecraft" Name="dyn_SystemName" />
+    <Item4 Ref="9" Description="System Name" ValueSourceSettings="#Ref-7" ValueInfo="Spacecraft" Name="dyn_System_Name" />
     <Item5 Ref="10" Visible="false" Description="OptionName" ValueInfo="Controlled" Name="dyn_OptionName" />
     <Item6 Ref="11" Description="LauncherAdapterMass" ValueInfo="78" Name="dyn_LauncherAdapterMass" Type="#Ref-5" />
     <Item7 Ref="12" Description="FuelMass" ValueInfo="0" Name="dyn_FuelMass" Type="#Ref-5" />
@@ -68,7 +68,7 @@
       <Controls>
         <Item1 Ref="63" ControlType="XRLabel" Name="label48" Multiline="true" TextAlignment="MiddleRight" SizeF="348,24" LocationFloat="348,42" Dpi="96" StyleName="EsaLighter" Font="Arial, 12pt" Padding="5,5,0,0,96">
           <ExpressionBindings>
-            <Item1 Ref="64" EventName="BeforePrint" PropertyName="Text" Expression="'System: ' + ?dyn_SystemName" />
+            <Item1 Ref="64" EventName="BeforePrint" PropertyName="Text" Expression="'System: ' + ?dyn_System_Name" />
           </ExpressionBindings>
           <StylePriority Ref="65" UseFont="false" UsePadding="false" UseTextAlignment="false" />
         </Item1>
