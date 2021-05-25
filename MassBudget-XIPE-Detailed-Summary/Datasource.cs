@@ -374,7 +374,7 @@ public class MyParameters : ReportingParameters
     			Variables.NestedParameters)
     		.FirstOrDefault();
     	list.Add(new ReportingParameter(
-					"OxidizerMass",
+					"CPROP Oxidizer Mass",
 					typeof(double),
 					oxidizerMass
 		));
