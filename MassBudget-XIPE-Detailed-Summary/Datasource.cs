@@ -396,7 +396,7 @@ public class MyParameters : ReportingParameters
     			Variables.NestedParameters)
     		.FirstOrDefault();
 		list.Add(new ReportingParameter(
-					"PropellantMass",
+					"EPROP Propellant Mass",
 					typeof(double),
 					propellantMass
 		));
