@@ -49,7 +49,7 @@ public static class Variables
 	/// The name of the Segment we want to get data for.
 	/// </summary>
 	public const string SpaceSegmentName = "Space Segment";
-	
+
 		// Contains all available parameter names and the order in which their column data should be shown in the report
         public static Dictionary<string, int> ParameterOrder =
             new Dictionary<string, int>
@@ -82,11 +82,11 @@ public class MyDataSource : OptionDependentDataCollector
 		// After selection the SelectedOption property will be set.
 		this.SelectOption();
 		var option = this.SelectedOption;
-		
+
 		// Get the tree of NestedElements for the selected Option.
 		var nestedElementTree = new NestedElementTreeGenerator().Generate(option).ToList();
 
-        // Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
+        // Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that
         // comply to the Hierarchy of categories defined here:
         //
         // - Missions
@@ -105,7 +105,7 @@ public class MyDataSource : OptionDependentDataCollector
             .AddLevel("Subsystems", "SubsystemName")
             .Build();
 
-        // Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
+        // Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that
         // comply to the Hierarchy of categories defined here:
         //
         // - Missions
@@ -126,19 +126,19 @@ public class MyDataSource : OptionDependentDataCollector
 
 
 		// Build a DataTable for the productHierarchy level (Product level)
-		// The third parameter in the GetTable method indicates that elements that do not contain 
+		// The third parameter in the GetTable method indicates that elements that do not contain
 		// any wanted parameters will not be shown in the result table.
-		var resultDataSource = 
+		var resultDataSource =
 	        new DataCollectorNodesCreator<RowRepresentation>()
 	        	.GetTable(productHierarchy, nestedElementTree, true);
-	
+
 		// Build a DataTable for the functionHierarchy level (Function level)
-		// The third parameter in the GetTable method indicates that elements that do not contain 
+		// The third parameter in the GetTable method indicates that elements that do not contain
 		// any wanted parameters will not be shown in the result table.
-	    var secondDataSource = 
+	    var secondDataSource =
 	        new DataCollectorNodesCreator<RowRepresentation>()
 	        	.GetTable(functionHierarchy, nestedElementTree, true);
-	
+
 		// Merge the two datatables
 		resultDataSource.Merge(secondDataSource);
 
@@ -150,8 +150,8 @@ public class MyDataSource : OptionDependentDataCollector
 			{
 				dataRow["Order"] = Variables.ParameterOrder[parameterName];
 			}
-			else 
-			{				
+			else
+			{
 				System.Windows.MessageBox.Show("Unknown Parameter Name '" + parameterName + "' not found. Please add it to the Variables.ParameterOrder property in the Code Editor.");
 
 				return null;
@@ -163,11 +163,11 @@ public class MyDataSource : OptionDependentDataCollector
 
 		// Find the data rows that contain a Segments name that is equal to the SpaceSegmentName set in the top of this file
 		// and add that table to the DataSet.
-		foreach (DataRow dataRow in segmentsTable.Rows) 
+		foreach (DataRow dataRow in segmentsTable.Rows)
 		{
 			var segment = dataRow["Segments"].ToString();
-				
-			if ((segment) == Variables.SpaceSegmentName) 
+
+			if ((segment) == Variables.SpaceSegmentName)
 			{
 				var newView = new DataView(resultDataSource);
 				newView.RowFilter = "Segments = '" + segment + "'";
@@ -192,38 +192,38 @@ public class MyDataSource : OptionDependentDataCollector
 public class RowRepresentation : DataCollectorRow
 {
 	/// <summary>
-	/// The Parameter classes for which we want to collect data. 
+	/// The Parameter classes for which we want to collect data.
 	/// Need to be public.
 	/// </summary>
-	
+
 	[DefinedThingShortName("P_on", "P_on")]
-	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterOn {get; set;}
+	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterOn { get; set; }
 
 	[DefinedThingShortName("P_stby", "P_stby")]
-	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterStby {get; set;}
+	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterStby { get; set; }
 
 	[DefinedThingShortName("P_peak", "P_peak")]
-	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterPeak {get; set;}
-	
+	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterPeak { get; set; }
+
 	[DefinedThingShortName("P_duty_cyc", "P_duty_cyc")]
-	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterDutyCyc {get; set;}
+	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterDutyCyc { get; set; }
 
 	[DefinedThingShortName("P_mean", "P_mean")]
-	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterMean {get; set;}
+	public DataCollectorStateDependentPerRowDoubleParameter<RowRepresentation> parameterMean { get; set; }
 
 	/// <summary>
 	/// The Category classes.
 	/// Need to be public.
 	/// </summary>
 	[DefinedThingShortName("Functions")]
-	public DataCollectorCategory<RowRepresentation> functionsCategory {get; set;}
+	public DataCollectorCategory<RowRepresentation> functionsCategory { get; set; }
 
 	[DefinedThingShortName("Products")]
-	public DataCollectorCategory<RowRepresentation> productsCategory {get; set;}
+	public DataCollectorCategory<RowRepresentation> productsCategory { get; set; }
 
 	/// <summary>
 	/// The implementation of the OwnerShortName property/column in the result datasource.
-	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class, 
+	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class,
 	/// of which this class is derived from.
 	/// this.ElementBaseOwner is the Owner DomainOfExpertise of the this.ElementBase property
 	/// </summary>
@@ -234,7 +234,7 @@ public class RowRepresentation : DataCollectorRow
 
 	/// <summary>
 	/// The implementation of the OwnerName property/column in the result datasource.
-	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class, 
+	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class,
 	/// of which this class is derived from.
 	/// this.ElementBaseOwner is the Owner DomainOfExpertise of the this.ElementBase property
 	/// </summary>
@@ -251,43 +251,42 @@ public class RowRepresentation : DataCollectorRow
 	{
 		get { return functionsCategory.Value ? "Function" : (productsCategory.Value ? "Product" : ""); }
 	}
-	
+
 	// Gets the order in which the ParameterName columns need to be ordered in the result pivot.
 	// Is set after DataTable creation
-	public int Order { get { return 0; }}
-
-}        
+	public int Order { get { return 0; } }
+}
 
 /// <summary>
 /// A class that is used to build Report Parameters and optional a specific filter string at the
-/// report level. 
+/// report level.
 /// </summary>
-public class MyParameters : ReportingParameters 
+public class MyParameters : ReportingParameters
 {
 	/// <summary>
-	/// Creates a list of report reporting parameter that should dynamically be added to the 
+	/// Creates a list of report reporting parameter that should dynamically be added to the
 	/// Report Designer's report parameter list.
 	/// </summary>
 	public override IEnumerable<IReportingParameter> CreateParameters(object dataSource, IDataCollector dataCollector) {
 	    var list = new List<IReportingParameter>();
 		var dataTable = dataSource as DataTable;
-	    
-		// Create the MissionName ReportingParameter 
+
+		// Create the MissionName ReportingParameter
 		var missionName = dataTable.Rows.Count > 0 ?  dataTable.Rows[0]["Missions"] : "Unknown";
 		var missionNameParameter = new 	ReportingParameter(
-						"MissionName", 
-						typeof(string), 
+						"MissionName",
+						typeof(string),
 						missionName);
 		missionNameParameter.Visible = false;
-		
+
 		list.Add(missionNameParameter);
 
 		// Create the Product / Function selection Reporting parameter
 		list.Add(
 			new ReportingParameter(
-				"ProductFunction", 
-				typeof(string), 
-				"Product", 
+				"ProductFunction",
+				typeof(string),
+				"Product",
 				"[ProductFunction] = ?" + ReportingParameter.NamePrefix + "ProductFunction" )
 		.AddLookupValue("Product", "Product")
 		.AddLookupValue("Function","Function")
@@ -295,10 +294,10 @@ public class MyParameters : ReportingParameters
 
 		// Create the Parameter selection ReportingParameter
 		var parameterTypeSelection = new ReportingParameter(
-				"ParameterName", 
-				typeof(string), 
+				"ParameterName",
+				typeof(string),
 				"P_mean");
-		
+
 		// Add a LookupValue for every ParameterName found in Variables.ParameterOrder
 		foreach (var keyValuePair in Variables.ParameterOrder)
 		{
@@ -307,13 +306,13 @@ public class MyParameters : ReportingParameters
 		parameterTypeSelection.IsMultiValue = true;
 
 		list.Add(parameterTypeSelection);
-		
+
 
 	    var optionDependentDataCollector = dataCollector as IOptionDependentDataCollector;
 
-		// Get the selected option. 
+		// Get the selected option.
 		var optionName = optionDependentDataCollector.SelectedOption.Name;
-		
+
 		// Create a dynamic parameter for use in the report header
 		var optionNameParameter = new ReportingParameter(
 					"OptionName",
@@ -325,4 +324,3 @@ public class MyParameters : ReportingParameters
 		return list;
 	}
 }
-

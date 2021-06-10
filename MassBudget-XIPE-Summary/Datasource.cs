@@ -51,7 +51,7 @@ public static class Variables
     /// </summary>
 	public const string SpaceSegmentName = "Space Segment";
 
-	// Paths to specific parameter values 
+	// Paths to specific parameter values
 	public static string LauncherAdapterPath = @"XIPE.Launch_Seg.VEGA.PLA_1194\m\\";
 	public static string FuelMassPath = "";
 	public static string OxidizerMassPath = "";
@@ -63,9 +63,9 @@ public static class Variables
     /// A report parameter used to switch between Product and Function level will always be available for these Owners/DomainOfExpertises.
 	/// Add/Remove owner shortnames at your convenience
 	/// </summary>
-	public static List<string> SubsystemNames = new List<string> 
+	public static List<string> SubsystemNames = new List<string>
     {
-    	"AOGNC", 
+    	"AOGNC",
     	"COM",
     	"CPROP",
     	"DH",
@@ -78,24 +78,24 @@ public static class Variables
     	"SYE",
     	"TC"
 	};
-	
+
 	// A list of NestedParameters to be used in this report
 	public static List<NestedParameter> NestedParameters;
 
 	// A list of Nestedelements to be used in this report
 	public static List<NestedElement> NestedElements;
-	
+
 	// Initialize the Variables using an Option.
-	public static void SetVariables(Option option) 
+	public static void SetVariables(Option option)
 	{
-		if (option != null) 
+		if (option != null)
 		{
 			LauncherAdapterPath = ReportingUtilities.ConvertToOptionPath(LauncherAdapterPath, option);
 			FuelMassPath = ReportingUtilities.ConvertToOptionPath(FuelMassPath, option);
 			OxidizerMassPath = ReportingUtilities.ConvertToOptionPath(OxidizerMassPath, option);
 			PressurantMassPath = ReportingUtilities.ConvertToOptionPath(PressurantMassPath, option);
 			PropellantMassPath = ReportingUtilities.ConvertToOptionPath(PropellantMassPath, option);
-			
+
 			// Get the tree of NestedElements for the selected Option.
 			NestedElements = new NestedElementTreeGenerator().Generate(option).ToList();
 
@@ -128,7 +128,7 @@ public class MyDataSource : OptionDependentDataCollector
 
 		Variables.SetVariables(option);
 
-		// Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
+		// Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that
 		// comply to the Hierarchy of categories defined here:
 		//
 		// - Missions
@@ -147,7 +147,7 @@ public class MyDataSource : OptionDependentDataCollector
 			.AddLevel("Subsystems", "SubsystemName")
 	        .Build();
 
-		// Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that 
+		// Create a CategoryDecompositionHierarchy instance that reads all elements in the ProductTree that
 		// comply to the Hierarchy of categories defined here:
 		//
 		// - Missions
@@ -165,20 +165,20 @@ public class MyDataSource : OptionDependentDataCollector
 			.AddLevel("Elements", "SystemName", 5)
 	        .AddLevel("Equipment", "SubsystemName")
 	        .Build();
-	
+
 		// Build a DataTable for the productHierarchy level (Product level)
-	    var resultDataSource = 
+	    var resultDataSource =
 	        new DataCollectorNodesCreator<RowRepresentation>()
 	        	.GetTable(productHierarchy, Variables.NestedElements);
-	
+
 		// Build a DataTable for the functionHierarchy level (Function level)
-	    var secondDataSource = 
+	    var secondDataSource =
 	        new DataCollectorNodesCreator<RowRepresentation>()
 	        	.GetTable(functionHierarchy, Variables.NestedElements);
-	
+
 		// Merge the two datatables
 		resultDataSource.Merge(secondDataSource);
-		
+
 		// Create a DataView that contains all Distinct values in the resultDataSource's Segments column,
 		var segmentsTable = new DataView(resultDataSource).ToTable(true, "Segments");
 
@@ -192,26 +192,26 @@ public class MyDataSource : OptionDependentDataCollector
 		{
 			dataRow["MassWithoutExtraMargin"] = dataRow["Mass"];
 
-			if (resultDataSource.Columns.Contains("SystemName_2_MassMargin")) 
+			if (resultDataSource.Columns.Contains("SystemName_2_MassMargin"))
 			{
-				if ((bool)dataRow["Products"] == true 
+				if ((bool)dataRow["Products"] == true
 					&& dataRow["SystemName_2_MassMargin"] != DBNull.Value
 					&& (double)dataRow["SystemName_2_MassMargin"] != 0D)
 				{
-					dataRow["HasExtraMassMargin"] = true;	
+					dataRow["HasExtraMassMargin"] = true;
 					dataRow["ExtraMassMargin"] = (double)dataRow["SystemName_2_MassMargin"] / 100;
 					dataRow["Mass"] = (double)dataRow["Mass"] * (1D + (double)dataRow["ExtraMassMargin"]);
 				}
 			}
 		}
-		
+
 		// Find the data rows that contain a Segments name that is equal to the SpaceSegmentName set in the top of this file
 		// and add that table to the DataSet.
-		foreach (DataRow dataRow in segmentsTable.Rows) 
+		foreach (DataRow dataRow in segmentsTable.Rows)
 		{
 			var segment = dataRow["Segments"].ToString();
-				
-			if ((segment) == Variables.SpaceSegmentName) 
+
+			if ((segment) == Variables.SpaceSegmentName)
 			{
 				var newView = new DataView(resultDataSource);
 				newView.RowFilter = "Segments = '" + segment + "'";
@@ -233,33 +233,33 @@ public class MyDataSource : OptionDependentDataCollector
 public class RowRepresentation : DataCollectorRow
 {
 	/// <summary>
-	/// The Parameter classes. 
+	/// The Parameter classes.
 	/// Need to be public.
 	/// </summary>
 	[DefinedThingShortName("m", "MassWithoutMargin")]
-	public DataCollectorDoubleParameter<RowRepresentation> parameterMass {get; set;}
+	public DataCollectorDoubleParameter<RowRepresentation> parameterMass { get; set; }
 
 	[DefinedThingShortName("mass_margin", "MassMargin")]
 	[CollectParentValues]
-	public DataCollectorDoubleParameter<RowRepresentation> parameterMassMargin {get; set;}	
+	public DataCollectorDoubleParameter<RowRepresentation> parameterMassMargin { get; set; }
 
 	[DefinedThingShortName("n_items")]
-	public DataCollectorDoubleParameter<RowRepresentation> parameterNumberOfItems {get; set;}	
+	public DataCollectorDoubleParameter<RowRepresentation> parameterNumberOfItems { get; set; }
 
 	/// <summary>
 	/// The Category classes.
 	/// Need to be public.
 	/// </summary>
 	[DefinedThingShortName("Functions")]
-	public DataCollectorCategory<RowRepresentation> functionsCategory {get; set;}
+	public DataCollectorCategory<RowRepresentation> functionsCategory { get; set; }
 
 	[DefinedThingShortName("Products")]
-	public DataCollectorCategory<RowRepresentation> productsCategory {get; set;}
+	public DataCollectorCategory<RowRepresentation> productsCategory { get; set; }
 
 	// Gets the number of items and returns 1 if it is 0
-	public double NumberOfItems 
+	public double NumberOfItems
 	{
-		get { return this.parameterNumberOfItems.Value == 0D ? 1D :  this.parameterNumberOfItems.Value; }
+		get { return this.parameterNumberOfItems.Value == 0D ? 1D : this.parameterNumberOfItems.Value; }
 	}
 
 	/// <summary>
@@ -273,7 +273,7 @@ public class RowRepresentation : DataCollectorRow
 
 	/// <summary>
 	/// The implementation of the OwnerShortName property/column in the result datasource.
-	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class, 
+	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class,
 	/// of which this class is derived from.
 	/// this.ElementBaseOwner is the Owner DomainOfExpertise of the this.ElementBase property
 	/// </summary>
@@ -281,31 +281,31 @@ public class RowRepresentation : DataCollectorRow
 	{
 	    get { return this.ElementBaseOwner.ShortName; }
 	}
-	
+
 	// The ExtraMassMargin percentage if found on the second element level
 	// Is set after DataTable creation.
-	public double ExtraMassMargin 
+	public double ExtraMassMargin
 	{
 		get { return 0D; }
 	}
 
 	// Indicates whether an Extra Mass margin is set at the second element level
 	// Is set after DataTable creation.
-	public bool HasExtraMassMargin 
+	public bool HasExtraMassMargin
 	{
 		get { return false; }
 	}
 
 	/// <summary>
 	/// The implementation of the OwnerName property/column in the result datasource.
-	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class, 
+	/// this.ElementBaseOwner is a default property of the abstract DataCollectorRow class,
 	/// of which this class is derived from.
 	/// this.ElementBaseOwner is the Owner DomainOfExpertise of the this.ElementBase property
 	/// </summary>
 	public string OwnerName
 	{
 	    get { return this.ElementBaseOwner.Name; }
-	}         
+	}
 
 	/// <summary>
 	/// Checks if this is Function or Product related data.
@@ -315,91 +315,91 @@ public class RowRepresentation : DataCollectorRow
 	{
 		get { return functionsCategory.Value ? "Function" : (productsCategory.Value ? "Product" : ""); }
 	}
-}        
+}
 
 /// <summary>
 /// A class that is used to build Report Parameters and optional a specific filter string at the
-/// report level. 
+/// report level.
 /// </summary>
-public class MyParameters : ReportingParameters 
+public class MyParameters : ReportingParameters
 {
 	/// <summary>
-	/// Creates a list of report reporting parameter that should dynamically be added to the 
+	/// Creates a list of report reporting parameter that should dynamically be added to the
 	/// Report Designer's report parameter list.
 	/// </summary>
 	public override IEnumerable<IReportingParameter> CreateParameters(object dataSource, IDataCollector dataCollector) {
 	    var list = new List<IReportingParameter>();
 
 	    var optionDependentDataCollector = dataCollector as IOptionDependentDataCollector;
-		
-		// Get the selected option. 
+
+		// Get the selected option.
 		var option = optionDependentDataCollector.SelectedOption;
 
-		// Get the selected options name. 
+		// Get the selected options name.
 		var optionName = option.Name;
 
 		// Create a dynamic parameter for use in the report header
 		var optionNameParameter = new ReportingParameter(
-					"OptionName", 
-					typeof(string), 
+					"OptionName",
+					typeof(string),
 					optionName);
 		optionNameParameter.Visible = false;
 		list.Add(optionNameParameter);
-		
+
 		// Get the launcher mass using its Path property from the ProductTree.
-		var launcherAdapterMass =  string.IsNullOrWhiteSpace(Variables.LauncherAdapterPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
-    			Variables.LauncherAdapterPath, 
+		var launcherAdapterMass = string.IsNullOrWhiteSpace(Variables.LauncherAdapterPath) ? 0D : option.GetNestedParameterValuesByPath<double>(
+    			Variables.LauncherAdapterPath,
     			Variables.NestedParameters)
     		.FirstOrDefault();
     	list.Add(new ReportingParameter(
-					"LauncherAdapterMass", 
+					"Launcher Adapter Mass",
 					typeof(double),
 					launcherAdapterMass
-		));	
+		));
 
 		// Get the fuel mass using its Path property from the ProductTree.
-		var fuelMass =  string.IsNullOrWhiteSpace(Variables.FuelMassPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
-    			Variables.FuelMassPath, 
+		var fuelMass = string.IsNullOrWhiteSpace(Variables.FuelMassPath) ? 0D : option.GetNestedParameterValuesByPath<double>(
+    			Variables.FuelMassPath,
     			Variables.NestedParameters)
     		.FirstOrDefault();
     	list.Add(new ReportingParameter(
-					"FuelMass", 
-					typeof(double), 
+					"CPROP Fuel Mass",
+					typeof(double),
 					fuelMass
-		));	
+		));
 
 		// Get the oxidizer mass using its Path property from the ProductTree.
-		var oxidizerMass = string.IsNullOrWhiteSpace(Variables.OxidizerMassPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
-    			Variables.OxidizerMassPath, 
+		var oxidizerMass = string.IsNullOrWhiteSpace(Variables.OxidizerMassPath) ? 0D : option.GetNestedParameterValuesByPath<double>(
+    			Variables.OxidizerMassPath,
     			Variables.NestedParameters)
     		.FirstOrDefault();
     	list.Add(new ReportingParameter(
-					"OxidizerMass", 
-					typeof(double), 
+					"CPROP Oxidizer Mass",
+					typeof(double),
 					oxidizerMass
-		));	
+		));
 
 		// Get the pressurant mass using its Path property from the ProductTree.
-		var pressurantMass = string.IsNullOrWhiteSpace(Variables.PressurantMassPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
-    			Variables.PressurantMassPath, 
+		var pressurantMass = string.IsNullOrWhiteSpace(Variables.PressurantMassPath) ? 0D : option.GetNestedParameterValuesByPath<double>(
+    			Variables.PressurantMassPath,
     			Variables.NestedParameters)
     		.First();
     	list.Add(new ReportingParameter(
-					"PressurantMass", 
-					typeof(double), 
+					"CPROP Pressurant Mass",
+					typeof(double),
 					pressurantMass
-		));	
+		));
 
 		// Get the propellant mass using its Path property from the ProductTree.
-		var propellantMass = string.IsNullOrWhiteSpace(Variables.PropellantMassPath) ? 0D: option.GetNestedParameterValuesByPath<double>(
-    			Variables.PropellantMassPath, 
+		var propellantMass = string.IsNullOrWhiteSpace(Variables.PropellantMassPath) ? 0D : option.GetNestedParameterValuesByPath<double>(
+    			Variables.PropellantMassPath,
     			Variables.NestedParameters)
     		.FirstOrDefault();
 		list.Add(new ReportingParameter(
-					"PropellantMass", 
-					typeof(double), 
+					"EPROP Propellant Mass",
+					typeof(double),
 					propellantMass
-		));	
+		));
 
 
 		var dataSet = dataSource as DataSet;
@@ -408,24 +408,24 @@ public class MyParameters : ReportingParameters
 
 		// Create a table of distinct owners that are currently available in the "calculated"
 		// datasource and merge that with the list of default SubSystems / Owners
-		foreach (DataRow row in new DataView(dataTable).ToTable(true, "OwnerShortName").Rows) 
+		foreach (DataRow row in new DataView(dataTable).ToTable(true, "OwnerShortName").Rows)
 	    {
 	    	var ownerShortName = row["OwnerShortName"].ToString();
-	    	if (!subsystemNames.Contains(ownerShortName)) 
+	    	if (!subsystemNames.Contains(ownerShortName))
 	    	{
 	    		subsystemNames.Add(ownerShortName);
 	    	}
 	    }
-	    
+
 	    // The report filter string to be set on the last added reporting filter
 	    var reportFilterString = string.Empty;
-	    	
+
 	    // Create Product / Function parameters for every Owner
-		foreach (var subSystem in subsystemNames.OrderBy(x => x))	
+		foreach (var subSystem in subsystemNames.OrderBy(x => x))
 		{
 			var prodfuncParameter = new ReportingParameter(
-					subSystem, 
-					typeof(string), 
+					subSystem,
+					typeof(string),
 					"Product")
 			.AddLookupValue("Product", "Product")
 			.AddLookupValue("Function","Function")
@@ -433,29 +433,29 @@ public class MyParameters : ReportingParameters
 
 			prodfuncParameter.ForceDefaultValue = false;
 
-			if (reportFilterString != string.Empty) 
+			if (reportFilterString != string.Empty)
 			{
 				reportFilterString += " OR ";
 			}
 			reportFilterString += "[ProductFunction] = ?" + ReportingParameter.NamePrefix + subSystem + " And [OwnerShortName] == '" + subSystem + "'";
-			
-			list.Add(prodfuncParameter);		
+
+			list.Add(prodfuncParameter);
 		}
-		
+
 		// Create a DataView that contains all Distinct values in the resultDataSource's SystemName_1 column,
 		var systemsTable = new DataView(dataTable).ToTable(true, "SystemName_1");
-		ReportingParameter systemParameter = null; 
-		
-		reportFilterString = "(" + reportFilterString + ") AND [SystemName_1] = ?dyn_SystemName";
+		ReportingParameter systemParameter = null;
+
+		reportFilterString = "(" + reportFilterString + ") AND [SystemName_1] = ?dyn_System_Name";
 
 		// Add a parameter with a lookup value for every "root" System found in the data.
-		foreach (DataRow row in systemsTable.Rows) 
+		foreach (DataRow row in systemsTable.Rows)
 		{
 			var systemName = row["SystemName_1"].ToString();
-			if (systemParameter == null) 
+			if (systemParameter == null)
 			{
 				systemParameter = new ReportingParameter(
-					"SystemName", 
+					"System Name",
 					typeof(string),
 					systemName,
 					reportFilterString
@@ -468,4 +468,3 @@ public class MyParameters : ReportingParameters
 		return list;
 	}
 }
-
