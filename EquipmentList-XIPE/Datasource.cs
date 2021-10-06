@@ -100,6 +100,57 @@ public class MyDataSource : OptionDependentDataCollector
 	        new DataCollectorNodesCreator<MainDataRow>()
 	        	.GetTable(productHierarchy, nestedElementTree);
 
+
+
+		//---------------------------------------------------
+		// Create distinct rows for all elements and summarize the NoOfItems
+		//---------------------------------------------------
+		var resultColumnArray = resultDataSource.Columns.Cast<DataColumn>()
+                                 .Select(x => x.ColumnName)
+                                 .Except(new [] {"NumberOfItems", "n_items", "Equipment"})
+                                 .ToArray();  
+
+		var distinctResultDataSource = new DataView(resultDataSource).ToTable(true, resultColumnArray);
+		distinctResultDataSource.Columns.Add("NumberOfItems", typeof(double));
+		distinctResultDataSource.Columns.Add("Equipment", typeof(string));
+
+		foreach (DataRow distinctRow in distinctResultDataSource.Rows)
+		{
+			distinctRow["NumberOfItems"] = 0D;
+			var writeElementDefinitionName = false;
+			foreach (DataRow row in resultDataSource.Rows) 
+			{
+				var write = true;
+				foreach (var columnName in resultColumnArray) 
+				{
+					if (!row[columnName].Equals(distinctRow[columnName]))
+					{
+						write = false;
+						break;
+					}
+				}
+				if (write) 
+				{
+					distinctRow["NumberOfItems"] = ((double)distinctRow["NumberOfItems"]) + ((double)row["NumberOfItems"]);
+
+					if (writeElementDefinitionName) 
+					{
+						distinctRow["Equipment"] = (string)row["ElementDefinitionName"];
+					}
+					else 
+					{
+						distinctRow["Equipment"] = (string)row["Equipment"];
+					}
+
+					writeElementDefinitionName = true;
+				}
+			}
+		}
+		resultDataSource = distinctResultDataSource;
+		//---------------------------------------------------
+
+
+
 		// Create a DataView that contains all Distinct values in the resultDataSource's Segments column,
 		var segmentsTable = new DataView(resultDataSource).ToTable(true, "Segments");
 
@@ -190,6 +241,31 @@ public class MainDataRow : DataCollectorRow
 	public string OwnerName
 	{
 	    get { return this.ElementBaseOwner.Name; }
+	}
+	
+		
+	/// <summary>
+	/// The implementation of the ElementDefinitionName property/column in the result datasource.
+	/// this.ElementBase is a default property of the abstract DataCollectorRow class,
+	/// of which this class is derived from. 
+	/// this.ElementBase can be an ElementDefinition, or ElementUsage.
+	/// </summary>
+	public string ElementDefinitionName
+	{
+	    get 
+	    {
+			if (this.ElementBase is ElementDefinition) 
+	    	{
+	    		return this.ElementBase.Name;
+	    	}
+	    	
+	    	if (this.ElementBase is ElementUsage) 
+	    	{
+	    		return ((ElementUsage)this.ElementBase).ElementDefinition.Name;
+	    	}
+
+			return null;
+    	}
 	}
 }
 
