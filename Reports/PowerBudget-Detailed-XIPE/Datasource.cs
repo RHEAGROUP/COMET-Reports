@@ -2,7 +2,7 @@
 // <copyright file="DataSource.cs" company="RHEA System S.A.">
 //    Copyright (c) 2015-2021 RHEA System S.A.
 //
-//    Author: Alexander van Delft, Sam Gerené, Alex Vorobiev
+//    Author: Alexander van Delft, Sam GerenÃ©, Alex Vorobiev
 //
 //    This file is part the COMET-Reports repository
 //
@@ -149,7 +149,7 @@ public class MyDataSource : OptionDependentDataCollector
         //---------------------------------------------------
         var resultColumnArray = resultDataSource.Columns.Cast<DataColumn>()
                                  .Select(x => x.ColumnName)
-                                 .Except(new[] { "NumberOfItems", "n_items", "SubsystemName" })
+                                 .Except(new[] { "NumberOfItems", "n_items", "SubsystemName", "SystemName_3", "SystemName_4", "SystemName_5" })
                                  .ToArray();
 
         var distinctResultDataSource = new DataView(resultDataSource).ToTable(true, resultColumnArray);
@@ -190,8 +190,9 @@ public class MyDataSource : OptionDependentDataCollector
 
         var stateList = systemModeList.ActualState.ToList().Select(x => x.ShortName);
 
-        foreach (var state in stateList)
+		foreach (var state in stateList)
         {
+        
             var newMeanColumn = new DataColumn("P_mean" + state, typeof(double));
             newMeanColumn.DefaultValue = 0D;
             resultDataSource.Columns.Add(newMeanColumn);
@@ -209,10 +210,12 @@ public class MyDataSource : OptionDependentDataCollector
             this.DynamicTableCellsCollector.AddFieldTableCell("dynamicP_maxTable", "P_max" + state);
 
             this.DynamicTableCellsCollector.AddExpressionTableCell("dynamicP_meanOwnerTotalsTable", "sumSum([P_mean" + state + "])");
+            this.DynamicTableCellsCollector.AddExpressionTableCell("dynamicP_meanSystemTotalsTable", "sumSum([P_mean" + state + "])");
             this.DynamicTableCellsCollector.AddExpressionTableCell("dynamicP_meanTotalsTable", "sumSum([P_mean" + state + "])");
             this.DynamicTableCellsCollector.AddExpressionTableCell("dynamicP_meanTotalsInclMarginTable", "sumSum([P_mean" + state + "] * (1 + ?SystemMargin / 100))");
 
             this.DynamicTableCellsCollector.AddExpressionTableCell("dynamicP_maxOwnerTotalsTable", "sumSum([P_max" + state + "])");
+            this.DynamicTableCellsCollector.AddExpressionTableCell("dynamicP_maxSystemTotalsTable", "sumSum([P_max" + state + "])");
             this.DynamicTableCellsCollector.AddExpressionTableCell("dynamicP_maxTotalsTable", "sumSum([P_max" + state + "])");
             this.DynamicTableCellsCollector.AddExpressionTableCell("dynamicP_maxTotalsInclMarginTable", "sumSum([P_max" + state + "] * (1 + (?SystemMargin / 100)))");
 
@@ -220,15 +223,16 @@ public class MyDataSource : OptionDependentDataCollector
             {
                 var P_mean = 0D;
                 var P_max = 0D;
+				var emptyValues = new [] {"", "-"}.ToList();
 
-                var P_duty_cyc = row["P_duty_cyc" + state].ToString() == "-" ? -1D : double.Parse(row["P_duty_cyc" + state].ToString());
+                var P_duty_cyc = emptyValues.Contains(row["P_duty_cyc" + state].ToString()) ? -1D : double.Parse(row["P_duty_cyc" + state].ToString());
                 var redundancy_type = row["redundancy_type"].ToString();
                 var redundancy_scheme = row["redundancy_scheme"].ToString();
-                var redundancy_k = row["redundancy_k"].ToString() == "-" ? 0D : double.Parse(row["redundancy_k"].ToString());
-                var redundancy_n = row["redundancy_n"].ToString() == "-" ? 0D : double.Parse(row["redundancy_n"].ToString());
-                var P_on = row["P_on"].ToString() == "-" ? 0D : double.Parse(row["P_on"].ToString());
-                var P_stby = row["P_stby"].ToString() == "-" ? 0D : double.Parse(row["P_stby"].ToString());
-                var NumberOfItems = row["NumberOfItems"].ToString() == "-" ? 0D : double.Parse(row["NumberOfItems"].ToString());
+                var redundancy_k = emptyValues.Contains(row["redundancy_k"].ToString()) ? 0D : double.Parse(row["redundancy_k"].ToString());
+                var redundancy_n = emptyValues.Contains(row["redundancy_n"].ToString()) ? 0D : double.Parse(row["redundancy_n"].ToString());
+                var P_on = emptyValues.Contains(row["P_on"].ToString()) ? 0D : double.Parse(row["P_on"].ToString());
+                var P_stby = emptyValues.Contains(row["P_stby"].ToString()) ? 0D : double.Parse(row["P_stby"].ToString());
+                var NumberOfItems = emptyValues.Contains(row["NumberOfItems"].ToString()) ? 0D : double.Parse(row["NumberOfItems"].ToString());
 
                 var passiveList = new List<string>();
                 passiveList.Add("Passive");
@@ -344,9 +348,6 @@ public class RowRepresentation : DataCollectorRow
 
     [DefinedThingShortName("P_duty_cyc", "P_duty_cyc")]
     public DataCollectorDoubleParameter<RowRepresentation> parameterDutyCyc { get; set; }
-
-    [DefinedThingShortName("P_mean", "P_mean")]
-    public DataCollectorDoubleParameter<RowRepresentation> parameterMean { get; set; }
 
     [DefinedThingShortName("n_items")]
     public DataCollectorDoubleParameter<RowRepresentation> parameterNumberOfItems { get; set; }

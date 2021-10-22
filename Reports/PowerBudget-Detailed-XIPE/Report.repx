@@ -189,174 +189,210 @@
       <Controls>
         <Item1 Ref="89" ControlType="XRPanel" Name="panel1" SizeF="1908,24" LocationFloat="0,0" StyleName="EsaNormal">
           <Controls>
-            <Item1 Ref="90" ControlType="XRLabel" Name="label3" Multiline="true" Text="label3" SizeF="512.5,23" LocationFloat="0,0" Font="Arial, 8pt, style=Bold" Padding="2,2,0,0,100">
-              <ExpressionBindings>
-                <Item1 Ref="91" EventName="BeforePrint" PropertyName="Text" Expression="Iif(IsNullOrEmpty([SystemName_2]), [SystemName_1], [SystemName_2])" />
-              </ExpressionBindings>
-              <StylePriority Ref="92" UseFont="false" />
+            <Item1 Ref="90" ControlType="XRTable" Name="dynamicP_maxSystemTotalsTable" TextAlignment="MiddleRight" SizeF="420,24" LocationFloat="1488,0" Padding="2,2,0,0,100" BorderColor="255,202,203,238" Borders="Left" BorderWidth="1">
+              <Rows>
+                <Item1 Ref="91" ControlType="XRTableRow" Name="tableRow13" Weight="1">
+                  <Cells>
+                    <Item1 Ref="92" ControlType="XRTableCell" Name="tableCell13" Weight="2.9999999999999996" Text="dynamicP_maxSystemTotalsTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black" Borders="None" BorderWidth="0">
+                      <Summary Ref="93" Running="Group" />
+                      <StylePriority Ref="94" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item1>
+              </Rows>
+              <StylePriority Ref="95" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item1>
+            <Item2 Ref="96" ControlType="XRTable" Name="dynamicP_meanSystemTotalsTable" TextAlignment="MiddleRight" SizeF="420,24" LocationFloat="1068,0" Padding="2,2,0,0,100" BorderColor="255,202,203,238" Borders="Left" BorderWidth="1">
+              <Rows>
+                <Item1 Ref="97" ControlType="XRTableRow" Name="tableRow14" Weight="1">
+                  <Cells>
+                    <Item1 Ref="98" ControlType="XRTableCell" Name="tableCell14" Weight="2.9999999999999996" Text="dynamicP_meanSystemTotalsTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black" Borders="None" BorderWidth="0">
+                      <Summary Ref="99" Running="Group" />
+                      <StylePriority Ref="100" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item1>
+              </Rows>
+              <StylePriority Ref="101" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+            </Item2>
+            <Item3 Ref="102" ControlType="XRLabel" Name="label3" Multiline="true" Text="label3" SizeF="512.5,23" LocationFloat="0,0" Font="Arial, 8pt, style=Bold" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="103" EventName="BeforePrint" PropertyName="Text" Expression="Iif(IsNullOrEmpty([SystemName_2]), [SystemName_1], [SystemName_2])" />
+              </ExpressionBindings>
+              <StylePriority Ref="104" UseFont="false" />
+            </Item3>
           </Controls>
         </Item1>
       </Controls>
     </Item5>
-    <Item6 Ref="93" ControlType="PageHeaderBand" Name="PageHeader1" HeightF="48">
+    <Item6 Ref="105" ControlType="PageHeaderBand" Name="PageHeader1" HeightF="48">
       <Controls>
-        <Item1 Ref="94" ControlType="XRPanel" Name="panel4" SizeF="1908,48" LocationFloat="0,0" StyleName="EsaDark">
+        <Item1 Ref="106" ControlType="XRPanel" Name="panel4" SizeF="1908,48" LocationFloat="0,0" StyleName="EsaDark">
           <Controls>
-            <Item1 Ref="95" ControlType="XRLabel" Name="label26" Multiline="true" Text="Mode maximum power" TextAlignment="MiddleCenter" SizeF="420,24" LocationFloat="1488,0" Padding="2,2,0,0,100" Borders="Left, Bottom" BorderWidth="1">
-              <StylePriority Ref="96" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+            <Item1 Ref="107" ControlType="XRLabel" Name="label26" Multiline="true" Text="Mode maximum power" TextAlignment="MiddleCenter" SizeF="420,24" LocationFloat="1488,0" Padding="2,2,0,0,100" Borders="Left, Bottom" BorderWidth="1">
+              <StylePriority Ref="108" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item1>
-            <Item2 Ref="97" ControlType="XRTable" Name="dynamicP_maxHeaderTable" TextAlignment="MiddleRight" SizeF="420,23" LocationFloat="1488,24" Borders="Left" BorderWidth="1">
+            <Item2 Ref="109" ControlType="XRTable" Name="dynamicP_maxHeaderTable" TextAlignment="MiddleRight" SizeF="420,23" LocationFloat="1488,24" Borders="Left" BorderWidth="1">
               <Rows>
-                <Item1 Ref="98" ControlType="XRTableRow" Name="tableRow4" Weight="1">
+                <Item1 Ref="110" ControlType="XRTableRow" Name="tableRow4" Weight="1">
                   <Cells>
-                    <Item1 Ref="99" ControlType="XRTableCell" Name="tableCell4" Weight="2.9999999999999996" Text="dynamicP_maxHeaderTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black">
-                      <StylePriority Ref="100" UseBorderColor="false" UseTextAlignment="false" />
+                    <Item1 Ref="111" ControlType="XRTableCell" Name="tableCell4" Weight="2.9999999999999996" Text="dynamicP_maxHeaderTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black">
+                      <StylePriority Ref="112" UseBorderColor="false" UseTextAlignment="false" />
                     </Item1>
                   </Cells>
                 </Item1>
               </Rows>
-              <StylePriority Ref="101" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+              <StylePriority Ref="113" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item2>
-            <Item3 Ref="102" ControlType="XRLabel" Name="label25" Multiline="true" Text="P_mean" TextAlignment="MiddleCenter" SizeF="420,24" LocationFloat="1068,0" Padding="2,2,0,0,100" Borders="Left, Bottom" BorderWidth="1">
-              <StylePriority Ref="103" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+            <Item3 Ref="114" ControlType="XRLabel" Name="label25" Multiline="true" Text="P_mean" TextAlignment="MiddleCenter" SizeF="420,24" LocationFloat="1068,0" Padding="2,2,0,0,100" Borders="Left, Bottom" BorderWidth="1">
+              <StylePriority Ref="115" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item3>
-            <Item4 Ref="104" ControlType="XRTable" Name="dynamicP_meanHeaderTable" TextAlignment="MiddleRight" SizeF="420,23" LocationFloat="1068,24" Borders="Left" BorderWidth="1">
+            <Item4 Ref="116" ControlType="XRTable" Name="dynamicP_meanHeaderTable" TextAlignment="MiddleRight" SizeF="420,23" LocationFloat="1068,24" Borders="Left" BorderWidth="1">
               <Rows>
-                <Item1 Ref="105" ControlType="XRTableRow" Name="tableRow3" Weight="1">
+                <Item1 Ref="117" ControlType="XRTableRow" Name="tableRow3" Weight="1">
                   <Cells>
-                    <Item1 Ref="106" ControlType="XRTableCell" Name="tableCell3" Weight="2.9999999999999996" Text="dynamicP_meanHeaderTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black">
-                      <StylePriority Ref="107" UseBorderColor="false" UseTextAlignment="false" />
+                    <Item1 Ref="118" ControlType="XRTableCell" Name="tableCell3" Weight="2.9999999999999996" Text="dynamicP_meanHeaderTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black">
+                      <StylePriority Ref="119" UseBorderColor="false" UseTextAlignment="false" />
                     </Item1>
                   </Cells>
                 </Item1>
               </Rows>
-              <StylePriority Ref="108" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+              <StylePriority Ref="120" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item4>
-            <Item5 Ref="109" ControlType="XRLabel" Name="label24" Multiline="true" Text="P_dut_cyc" TextAlignment="MiddleCenter" SizeF="420,24" LocationFloat="408,0" Padding="2,2,0,0,100" Borders="Left, Bottom" BorderWidth="1">
-              <StylePriority Ref="110" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+            <Item5 Ref="121" ControlType="XRLabel" Name="label24" Multiline="true" Text="P_dut_cyc" TextAlignment="MiddleCenter" SizeF="420,24" LocationFloat="408,0" Padding="2,2,0,0,100" Borders="Left, Bottom" BorderWidth="1">
+              <StylePriority Ref="122" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item5>
-            <Item6 Ref="111" ControlType="XRTable" Name="dynamicDutyCycleHeaderTable" TextAlignment="MiddleRight" SizeF="420,23" LocationFloat="408,24" Borders="Left" BorderWidth="1">
+            <Item6 Ref="123" ControlType="XRTable" Name="dynamicDutyCycleHeaderTable" TextAlignment="MiddleRight" SizeF="420,23" LocationFloat="408,24" Borders="Left" BorderWidth="1">
               <Rows>
-                <Item1 Ref="112" ControlType="XRTableRow" Name="tableRow2" Weight="1">
+                <Item1 Ref="124" ControlType="XRTableRow" Name="tableRow2" Weight="1">
                   <Cells>
-                    <Item1 Ref="113" ControlType="XRTableCell" Name="tableCell1" Weight="2.9999999999999996" Text="dynamicDutyCycleHeaderTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black">
-                      <StylePriority Ref="114" UseBorderColor="false" UseTextAlignment="false" />
+                    <Item1 Ref="125" ControlType="XRTableCell" Name="tableCell1" Weight="2.9999999999999996" Text="dynamicDutyCycleHeaderTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black">
+                      <StylePriority Ref="126" UseBorderColor="false" UseTextAlignment="false" />
                     </Item1>
                   </Cells>
                 </Item1>
               </Rows>
-              <StylePriority Ref="115" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+              <StylePriority Ref="127" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item6>
-            <Item7 Ref="116" ControlType="XRLabel" Name="label23" Multiline="true" Text="# items" TextAlignment="MiddleCenter" SizeF="36,48" LocationFloat="1032,0" Padding="2,2,0,0,100" Borders="Left" BorderWidth="1">
-              <StylePriority Ref="117" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+            <Item7 Ref="128" ControlType="XRLabel" Name="label23" Multiline="true" Text="# items" TextAlignment="MiddleCenter" SizeF="36,48" LocationFloat="1032,0" Padding="2,2,0,0,100" Borders="Left" BorderWidth="1">
+              <StylePriority Ref="129" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item7>
-            <Item8 Ref="118" ControlType="XRLabel" Name="label22" Multiline="true" Text="N" TextAlignment="MiddleRight" SizeF="36,23" LocationFloat="996,25" Padding="2,2,0,0,100">
-              <StylePriority Ref="119" UseTextAlignment="false" />
+            <Item8 Ref="130" ControlType="XRLabel" Name="label22" Multiline="true" Text="N" TextAlignment="MiddleRight" SizeF="36,23" LocationFloat="996,25" Padding="2,2,0,0,100">
+              <StylePriority Ref="131" UseTextAlignment="false" />
             </Item8>
-            <Item9 Ref="120" ControlType="XRLabel" Name="label21" Multiline="true" Text="K" TextAlignment="MiddleRight" SizeF="36,23" LocationFloat="960,25" Padding="2,2,0,0,100">
-              <StylePriority Ref="121" UseTextAlignment="false" />
+            <Item9 Ref="132" ControlType="XRLabel" Name="label21" Multiline="true" Text="K" TextAlignment="MiddleRight" SizeF="36,23" LocationFloat="960,25" Padding="2,2,0,0,100">
+              <StylePriority Ref="133" UseTextAlignment="false" />
             </Item9>
-            <Item10 Ref="122" ControlType="XRLabel" Name="label20" Multiline="true" Text="Type" SizeF="66,23" LocationFloat="894,25" Padding="2,2,0,0,100" />
-            <Item11 Ref="123" ControlType="XRLabel" Name="label19" Multiline="true" Text="Scheme" SizeF="66,23" LocationFloat="828,24" Padding="2,2,0,0,100" Borders="Left" BorderWidth="1">
-              <StylePriority Ref="124" UseBorders="false" UseBorderWidth="false" />
+            <Item10 Ref="134" ControlType="XRLabel" Name="label20" Multiline="true" Text="Type" SizeF="66,23" LocationFloat="894,25" Padding="2,2,0,0,100" />
+            <Item11 Ref="135" ControlType="XRLabel" Name="label19" Multiline="true" Text="Scheme" SizeF="66,23" LocationFloat="828,24" Padding="2,2,0,0,100" Borders="Left" BorderWidth="1">
+              <StylePriority Ref="136" UseBorders="false" UseBorderWidth="false" />
             </Item11>
-            <Item12 Ref="125" ControlType="XRLabel" Name="label17" Multiline="true" Text="Redundancy" TextAlignment="MiddleCenter" SizeF="204,24" LocationFloat="828,0" Font="Arial, 8pt" Padding="2,2,0,0,100" Borders="Left, Bottom" BorderWidth="1">
-              <StylePriority Ref="126" UseFont="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+            <Item12 Ref="137" ControlType="XRLabel" Name="label17" Multiline="true" Text="Redundancy" TextAlignment="MiddleCenter" SizeF="204,24" LocationFloat="828,0" Font="Arial, 8pt" Padding="2,2,0,0,100" Borders="Left, Bottom" BorderWidth="1">
+              <StylePriority Ref="138" UseFont="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item12>
-            <Item13 Ref="127" ControlType="XRLabel" Name="label10" Multiline="true" Text="P_stby" TextAlignment="MiddleRight" SizeF="54,48" LocationFloat="354,0" StyleName="EsaDark" Font="Arial, 8pt" Padding="2,2,0,0,100" Borders="Left" BorderWidth="1">
-              <StylePriority Ref="128" UseFont="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+            <Item13 Ref="139" ControlType="XRLabel" Name="label10" Multiline="true" Text="P_stby" TextAlignment="MiddleRight" SizeF="54,48" LocationFloat="354,0" StyleName="EsaDark" Font="Arial, 8pt" Padding="2,2,0,0,100" Borders="Left" BorderWidth="1">
+              <StylePriority Ref="140" UseFont="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item13>
-            <Item14 Ref="129" ControlType="XRLabel" Name="label9" Multiline="true" Text="P_on" TextAlignment="MiddleRight" SizeF="54,48" LocationFloat="300,0" StyleName="EsaDark" Font="Arial, 8pt" Padding="2,2,0,0,100" Borders="Left" BorderWidth="1">
-              <StylePriority Ref="130" UseFont="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+            <Item14 Ref="141" ControlType="XRLabel" Name="label9" Multiline="true" Text="P_on" TextAlignment="MiddleRight" SizeF="54,48" LocationFloat="300,0" StyleName="EsaDark" Font="Arial, 8pt" Padding="2,2,0,0,100" Borders="Left" BorderWidth="1">
+              <StylePriority Ref="142" UseFont="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item14>
-            <Item15 Ref="131" ControlType="XRLabel" Name="label8" Multiline="true" Text="System/Subsystem" TextAlignment="MiddleLeft" SizeF="300,48" LocationFloat="0,0" StyleName="EsaDark" Font="Arial, 8pt" Padding="2,2,0,0,100">
-              <StylePriority Ref="132" UseFont="false" />
+            <Item15 Ref="143" ControlType="XRLabel" Name="label8" Multiline="true" Text="System/Subsystem" TextAlignment="MiddleLeft" SizeF="300,48" LocationFloat="0,0" StyleName="EsaDark" Font="Arial, 8pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="144" UseFont="false" />
             </Item15>
           </Controls>
         </Item1>
       </Controls>
     </Item6>
-    <Item7 Ref="133" ControlType="GroupFooterBand" Name="GroupFooter1" Level="1" HeightF="48">
+    <Item7 Ref="145" ControlType="ReportFooterBand" Name="ReportFooter1" HeightF="48">
       <Controls>
-        <Item1 Ref="134" ControlType="XRLine" Name="line1" SizeF="1908,2" LocationFloat="0,0" ForeColor="255,202,203,238" BorderColor="255,202,203,238">
-          <StylePriority Ref="135" UseForeColor="false" UseBorderColor="false" />
+        <Item1 Ref="146" ControlType="XRLine" Name="line1" SizeF="1908,2" LocationFloat="0,0" ForeColor="255,202,203,238" BorderColor="255,202,203,238">
+          <StylePriority Ref="147" UseForeColor="false" UseBorderColor="false" />
         </Item1>
-        <Item2 Ref="136" ControlType="XRPanel" Name="panel5" SizeF="990,48" LocationFloat="918,0" StyleName="EsaDark">
+        <Item2 Ref="148" ControlType="XRPanel" Name="panel5" SizeF="990,48" LocationFloat="918,0" StyleName="EsaDark">
           <Controls>
-            <Item1 Ref="137" ControlType="XRTable" Name="dynamicP_maxTotalsInclMarginTable" TextAlignment="MiddleRight" SizeF="420,24" LocationFloat="570,24" Padding="2,2,0,0,100" BorderColor="255,202,203,238" Borders="Left" BorderWidth="1">
+            <Item1 Ref="149" ControlType="XRTable" Name="dynamicP_maxTotalsInclMarginTable" TextAlignment="MiddleRight" SizeF="420,24" LocationFloat="570,24" Padding="2,2,0,0,100" BorderColor="255,202,203,238" Borders="Left" BorderWidth="1">
               <Rows>
-                <Item1 Ref="138" ControlType="XRTableRow" Name="tableRow10" Weight="1">
+                <Item1 Ref="150" ControlType="XRTableRow" Name="tableRow10" Weight="1">
                   <Cells>
-                    <Item1 Ref="139" ControlType="XRTableCell" Name="tableCell10" Weight="2.9999999999999996" Text="dynamicP_maxTotalsInclMarginTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black" Borders="None" BorderWidth="0">
-                      <Summary Ref="140" Running="Group" />
+                    <Item1 Ref="151" ControlType="XRTableCell" Name="tableCell10" Weight="2.9999999999999996" Text="dynamicP_maxTotalsInclMarginTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black" Borders="None" BorderWidth="0">
+                      <Summary Ref="152" Running="Report" />
                       <ExpressionBindings>
-                        <Item1 Ref="141" EventName="BeforePrint" PropertyName="Text" />
+                        <Item1 Ref="153" EventName="BeforePrint" PropertyName="Text" />
+                        <Item2 Ref="154" EventName="BeforePrint" PropertyName="Text" Expression="sumSum()" />
                       </ExpressionBindings>
-                      <StylePriority Ref="142" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                      <StylePriority Ref="155" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
                     </Item1>
                   </Cells>
                 </Item1>
               </Rows>
-              <StylePriority Ref="143" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+              <StylePriority Ref="156" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item1>
-            <Item2 Ref="144" ControlType="XRTable" Name="dynamicP_maxTotalsTable" TextAlignment="MiddleRight" SizeF="420,24" LocationFloat="570,0" Padding="2,2,0,0,100" BorderColor="255,202,203,238" Borders="Left" BorderWidth="1">
+            <Item2 Ref="157" ControlType="XRTable" Name="dynamicP_maxTotalsTable" TextAlignment="MiddleRight" SizeF="420,24" LocationFloat="570,0" Padding="2,2,0,0,100" BorderColor="255,202,203,238" Borders="Left" BorderWidth="1">
               <Rows>
-                <Item1 Ref="145" ControlType="XRTableRow" Name="tableRow9" Weight="1">
+                <Item1 Ref="158" ControlType="XRTableRow" Name="tableRow9" Weight="1">
                   <Cells>
-                    <Item1 Ref="146" ControlType="XRTableCell" Name="tableCell9" Weight="2.9999999999999996" Text="dynamicP_maxTotalsTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black" Borders="None" BorderWidth="0">
-                      <Summary Ref="147" Running="Group" />
-                      <StylePriority Ref="148" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    <Item1 Ref="159" ControlType="XRTableCell" Name="tableCell9" Weight="2.9999999999999996" Text="dynamicP_maxTotalsTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black" Borders="None" BorderWidth="0">
+                      <Summary Ref="160" Running="Report" />
+                      <ExpressionBindings>
+                        <Item1 Ref="161" EventName="BeforePrint" PropertyName="Text" Expression="sumSum()" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="162" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
                     </Item1>
                   </Cells>
                 </Item1>
               </Rows>
-              <StylePriority Ref="149" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+              <StylePriority Ref="163" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item2>
-            <Item3 Ref="150" ControlType="XRTable" Name="dynamicP_meanTotalsInclMarginTable" TextAlignment="MiddleRight" SizeF="420,24" LocationFloat="150,24" Padding="2,2,0,0,100" BorderColor="255,202,203,238" Borders="Left" BorderWidth="1">
+            <Item3 Ref="164" ControlType="XRTable" Name="dynamicP_meanTotalsInclMarginTable" TextAlignment="MiddleRight" SizeF="420,24" LocationFloat="150,24" Padding="2,2,0,0,100" BorderColor="255,202,203,238" Borders="Left" BorderWidth="1">
               <Rows>
-                <Item1 Ref="151" ControlType="XRTableRow" Name="tableRow8" Weight="1">
+                <Item1 Ref="165" ControlType="XRTableRow" Name="tableRow8" Weight="1">
                   <Cells>
-                    <Item1 Ref="152" ControlType="XRTableCell" Name="tableCell8" Weight="2.9999999999999996" Text="dynamicP_meanTotalsInclMarginTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black" Borders="None" BorderWidth="0">
-                      <Summary Ref="153" Running="Group" />
-                      <StylePriority Ref="154" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    <Item1 Ref="166" ControlType="XRTableCell" Name="tableCell8" Weight="2.9999999999999996" Text="dynamicP_meanTotalsInclMarginTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black" Borders="None" BorderWidth="0">
+                      <Summary Ref="167" Running="Report" />
+                      <ExpressionBindings>
+                        <Item1 Ref="168" EventName="BeforePrint" PropertyName="Text" Expression="sumSum()" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="169" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
                     </Item1>
                   </Cells>
                 </Item1>
               </Rows>
-              <StylePriority Ref="155" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+              <StylePriority Ref="170" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item3>
-            <Item4 Ref="156" ControlType="XRTable" Name="dynamicP_meanTotalsTable" TextAlignment="MiddleRight" SizeF="420,24" LocationFloat="150,0" Padding="2,2,0,0,100" BorderColor="255,202,203,238" Borders="Left" BorderWidth="1">
+            <Item4 Ref="171" ControlType="XRTable" Name="dynamicP_meanTotalsTable" TextAlignment="MiddleRight" SizeF="420,24" LocationFloat="150,0" Padding="2,2,0,0,100" BorderColor="255,202,203,238" Borders="Left" BorderWidth="1">
               <Rows>
-                <Item1 Ref="157" ControlType="XRTableRow" Name="tableRow7" Weight="1">
+                <Item1 Ref="172" ControlType="XRTableRow" Name="tableRow7" Weight="1">
                   <Cells>
-                    <Item1 Ref="158" ControlType="XRTableCell" Name="tableCell7" Weight="2.9999999999999996" Text="dynamicP_meanTotalsTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black" Borders="None" BorderWidth="0">
-                      <Summary Ref="159" Running="Group" />
-                      <StylePriority Ref="160" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    <Item1 Ref="173" ControlType="XRTableCell" Name="tableCell7" Weight="2.9999999999999996" Text="dynamicP_meanTotalsTable" TextAlignment="MiddleRight" Padding="2,2,0,0,96" BorderColor="Black" Borders="None" BorderWidth="0">
+                      <Summary Ref="174" Running="Report" />
+                      <ExpressionBindings>
+                        <Item1 Ref="175" EventName="BeforePrint" PropertyName="Text" Expression="sumSum()" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="176" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
                     </Item1>
                   </Cells>
                 </Item1>
               </Rows>
-              <StylePriority Ref="161" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+              <StylePriority Ref="177" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
             </Item4>
-            <Item5 Ref="162" ControlType="XRLabel" Name="label28" Multiline="true" Text="Totals" SizeF="150,23" LocationFloat="0,24" Padding="2,2,0,0,100">
+            <Item5 Ref="178" ControlType="XRLabel" Name="label28" Multiline="true" Text="Totals" SizeF="150,23" LocationFloat="0,24" Padding="2,2,0,0,100">
               <ExpressionBindings>
-                <Item1 Ref="163" EventName="BeforePrint" PropertyName="Text" Expression="'Totals incl. ' + ?SystemMargin + '% margin'" />
+                <Item1 Ref="179" EventName="BeforePrint" PropertyName="Text" Expression="'Totals incl. ' + ?SystemMargin + '% margin'" />
               </ExpressionBindings>
             </Item5>
-            <Item6 Ref="164" ControlType="XRLabel" Name="label27" Multiline="true" Text="Totals" SizeF="150,23" LocationFloat="0,0" Padding="2,2,0,0,100" />
+            <Item6 Ref="180" ControlType="XRLabel" Name="label27" Multiline="true" Text="Totals" SizeF="150,23" LocationFloat="0,0" Padding="2,2,0,0,100" />
           </Controls>
         </Item2>
       </Controls>
     </Item7>
   </Bands>
-  <Scripts Ref="165" OnAfterPrint="PowerBudget_AfterPrint" />
+  <Scripts Ref="181" OnAfterPrint="PowerBudget_AfterPrint" />
   <StyleSheet>
-    <Item1 Ref="166" Name="EsaDark" BorderStyle="Inset" Font="Arial, 8pt" ForeColor="White" BackColor="255,52,51,153" StringFormat="Near;Center;FitBlackBox, LineLimit, NoClip;None;Character;GenericTypographic" TextAlignment="MiddleLeft" BorderWidthSerializable="0" />
-    <Item2 Ref="167" Name="EsaNormal" BorderStyle="Inset" Padding="0,0,0,0,96" Font="Arial, 8pt" BackColor="255,138,140,217" StringFormat="Near;Center;FitBlackBox, LineLimit, NoClip;None;Character;GenericTypographic" TextAlignment="MiddleLeft" BorderWidthSerializable="0" />
-    <Item3 Ref="168" Name="EsaLight" BorderStyle="Inset" Padding="0,0,0,0,96" Font="Arial, 8pt" ForeColor="Black" BackColor="255,202,203,238" BorderColor="Black" BorderDashStyle="Solid" Sides="None" StringFormat="Near;Center;FitBlackBox, LineLimit, NoClip;None;Character;GenericTypographic" TextAlignment="MiddleLeft" BorderWidthSerializable="0" />
-    <Item4 Ref="169" Name="EsaLighter" BorderStyle="Inset" Padding="0,0,0,0,96" Font="Arial, 8pt" BackColor="255,239,239,250" Sides="None" StringFormat="Near;Center;FitBlackBox, LineLimit, NoClip;None;Character;GenericTypographic" TextAlignment="MiddleLeft" BorderWidthSerializable="0" />
-    <Item5 Ref="170" Name="EsaWhite" BorderStyle="Inset" Padding="0,0,0,0,96" Font="Arial, 8pt" BackColor="Transparent" Sides="None" StringFormat="Near;Center;FitBlackBox, LineLimit, NoClip;None;Character;GenericTypographic" TextAlignment="MiddleLeft" BorderWidthSerializable="0" />
+    <Item1 Ref="182" Name="EsaDark" BorderStyle="Inset" Font="Arial, 8pt" ForeColor="White" BackColor="255,52,51,153" StringFormat="Near;Center;FitBlackBox, LineLimit, NoClip;None;Character;GenericTypographic" TextAlignment="MiddleLeft" BorderWidthSerializable="0" />
+    <Item2 Ref="183" Name="EsaNormal" BorderStyle="Inset" Padding="0,0,0,0,96" Font="Arial, 8pt" BackColor="255,138,140,217" StringFormat="Near;Center;FitBlackBox, LineLimit, NoClip;None;Character;GenericTypographic" TextAlignment="MiddleLeft" BorderWidthSerializable="0" />
+    <Item3 Ref="184" Name="EsaLight" BorderStyle="Inset" Padding="0,0,0,0,96" Font="Arial, 8pt" ForeColor="Black" BackColor="255,202,203,238" BorderColor="Black" BorderDashStyle="Solid" Sides="None" StringFormat="Near;Center;FitBlackBox, LineLimit, NoClip;None;Character;GenericTypographic" TextAlignment="MiddleLeft" BorderWidthSerializable="0" />
+    <Item4 Ref="185" Name="EsaLighter" BorderStyle="Inset" Padding="0,0,0,0,96" Font="Arial, 8pt" BackColor="255,239,239,250" Sides="None" StringFormat="Near;Center;FitBlackBox, LineLimit, NoClip;None;Character;GenericTypographic" TextAlignment="MiddleLeft" BorderWidthSerializable="0" />
+    <Item5 Ref="186" Name="EsaWhite" BorderStyle="Inset" Padding="0,0,0,0,96" Font="Arial, 8pt" BackColor="Transparent" Sides="None" StringFormat="Near;Center;FitBlackBox, LineLimit, NoClip;None;Character;GenericTypographic" TextAlignment="MiddleLeft" BorderWidthSerializable="0" />
   </StyleSheet>
   <ComponentStorage>
     <Item1 Ref="0" ObjectType="DevExpress.DataAccess.ObjectBinding.ObjectDataSource,DevExpress.DataAccess.v20.2" Name="ReportDataSource" Base64="PE9iamVjdERhdGFTb3VyY2UgTmFtZT0iUmVwb3J0RGF0YVNvdXJjZSI+PERhdGFTb3VyY2UgVHlwZT0iU3lzdGVtLkRhdGEuRGF0YVRhYmxlLCBTeXN0ZW0uRGF0YSwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkiIC8+PC9PYmplY3REYXRhU291cmNlPg==" />
@@ -365,11 +401,11 @@
     <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="2" Content="System.Double" Type="System.Type" />
     <Item2 Ref="6" ObjectType="DevExpress.XtraReports.Parameters.StaticListLookUpSettings, DevExpress.Printing.v20.2.Core">
       <LookUpValues>
-        <Item1 Ref="172" Value="#Ref-171" Description="Product" />
-        <Item2 Ref="174" Value="#Ref-173" Description="Function" />
+        <Item1 Ref="188" Value="#Ref-187" Description="Product" />
+        <Item2 Ref="190" Value="#Ref-189" Description="Function" />
       </LookUpValues>
     </Item2>
-    <Item3 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="171" Content="Product" Type="System.String" />
-    <Item4 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="173" Content="Function" Type="System.String" />
+    <Item3 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="187" Content="Product" Type="System.String" />
+    <Item4 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="189" Content="Function" Type="System.String" />
   </ObjectStorage>
 </XtraReportsLayoutSerializer>

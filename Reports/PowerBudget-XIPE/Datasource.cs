@@ -2,7 +2,7 @@
 // <copyright file="DataSource.cs" company="RHEA System S.A.">
 //    Copyright (c) 2015-2021 RHEA System S.A.
 //
-//    Author: Alexander van Delft, Sam Gerené, Alex Vorobiev
+//    Author: Alexander van Delft, Sam GerenÃ©, Alex Vorobiev
 //
 //    This file is part the COMET-Reports repository
 //
