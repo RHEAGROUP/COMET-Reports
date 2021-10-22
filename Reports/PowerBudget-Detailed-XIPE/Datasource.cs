@@ -404,10 +404,6 @@ public class RowRepresentation : DataCollectorRow
         get { return functionsCategory.Value ? "Function" : (productsCategory.Value ? "Product" : ""); }
     }
 
-    // Gets the order in which the ParameterName columns need to be ordered in the result pivot.
-    // Is set after DataTable creation
-    public int Order { get { return 0; } }
-
     // Gets the ElementDefinition for a specific ElementBase.
     private ElementDefinition GetElementDefinition()
     {
