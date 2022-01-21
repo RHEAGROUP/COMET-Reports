@@ -1,5 +1,11 @@
 # XIPE Equipment list
 
+A Report Definition file (*.rep4) can be opened in the Reporting browser in COMET.
+It is basically a .zip file that contains a datasource.cs file and a report.repx file.
+The first contains the code that is loaded in the Code Editor.
+The latter contains the definition of the visual part of a report (https://docs.devexpress.com/XtraReports/114104/wpf-reporting/end-user-report-designer-for-wpf).
+</br>
+
 ## Version info
 This report can only be executed in a COMET version >= 8.0.1.
 </br>

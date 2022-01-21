@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 // <copyright file="DataSource.cs" company="RHEA System S.A.">
-//    Copyright (c) 2015-2021 RHEA System S.A.
+//    Copyright (c) 2015-2022 RHEA System S.A.
 //
 //    Author: Alexander van Delft, Sam Gerené, Alex Vorobiev
 //
@@ -20,7 +20,7 @@
 //    along with this program; if not, write to the Free Software Foundation,
 //    Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 /// <summary>
 /// the using statements needed for all code to work
@@ -221,8 +221,6 @@ public class MyDataSource : OptionDependentDataCollector
 
             foreach (DataRow row in resultDataSource.Rows)
             {
-                var P_mean = 0D;
-                var P_max = 0D;
 				var emptyValues = new [] {"", "-"}.ToList();
 
                 var P_duty_cyc = emptyValues.Contains(row["P_duty_cyc" + state].ToString()) ? -1D : double.Parse(row["P_duty_cyc" + state].ToString());
@@ -233,35 +231,32 @@ public class MyDataSource : OptionDependentDataCollector
                 var P_on = emptyValues.Contains(row["P_on"].ToString()) ? 0D : double.Parse(row["P_on"].ToString());
                 var P_stby = emptyValues.Contains(row["P_stby"].ToString()) ? 0D : double.Parse(row["P_stby"].ToString());
                 var NumberOfItems = emptyValues.Contains(row["NumberOfItems"].ToString()) ? 0D : double.Parse(row["NumberOfItems"].ToString());
-
-                var passiveList = new List<string>();
-                passiveList.Add("Passive");
-                passiveList.Add("Cold");
-                passiveList.Add("Standby");
-
+                var maturity_margin = emptyValues.Contains(row["maturity_margin"].ToString()) ? 0D : double.Parse(row["maturity_margin"].ToString());
+                
                 // --------------------------------------------------------
                 // Calculate P_mean
                 // --------------------------------------------------------
-                if (P_duty_cyc == -1)
+                var P_mean = 0D;
+
+                if (P_duty_cyc != -1)
                 {
-                    P_mean = 0D;
-                }
-                else
-                {
-                    if (redundancy_type == "External")
+                	P_mean = double.NaN;
+
+					if (redundancy_type == "External")
                     {
-                        if (passiveList.Contains(redundancy_scheme))
+                        if (redundancy_scheme == "Cold")
                         {
-                            P_mean = redundancy_k * ((P_on * P_duty_cyc) + (P_stby * (1 - P_duty_cyc)));
+                            P_mean = (redundancy_k / redundancy_n) * NumberOfItems * ((P_on * P_duty_cyc) + (P_stby * (1 - P_duty_cyc))) * (1 + maturity_margin / 100);
                         }
-                        else
+                        else if (redundancy_scheme == "Standby")
                         {
-                            P_mean = redundancy_n * ((P_on * P_duty_cyc) + (P_stby * (1 - P_duty_cyc)));
+                        	P_mean = ((redundancy_k / redundancy_n) * NumberOfItems * ((P_on * P_duty_cyc) + (P_stby * (1 - P_duty_cyc)))) + (((redundancy_n - redundancy_k) / redundancy_n) *  NumberOfItems  * P_stby) * (1 + maturity_margin / 100);
                         }
                     }
-                    else
+                    
+                    if (Double.IsNaN(P_mean))
                     {
-                        P_mean = NumberOfItems * ((P_on * P_duty_cyc) + (P_stby * (1 - P_duty_cyc)));
+                        P_mean = NumberOfItems * ((P_on * P_duty_cyc) + (P_stby * (1 - P_duty_cyc))) * (1 + maturity_margin / 100);
                     }
                 }
 
@@ -271,46 +266,44 @@ public class MyDataSource : OptionDependentDataCollector
                 // --------------------------------------------------------
                 // Calculate P_max
                 // --------------------------------------------------------
-                if (P_duty_cyc == -1)
+                var P_max = 0D;
+
+                if (P_duty_cyc != -1)
                 {
-                    P_max = 0D;
-                }
-                else
-                {
+                	P_max = double.NaN;
                     if (P_duty_cyc == 0)
                     {
+                    
                         if (redundancy_type == "External")
                         {
-                            if (passiveList.Contains(redundancy_scheme))
+                            if (redundancy_scheme == "Cold")
                             {
-                                P_max = P_stby * redundancy_k;
-                            }
-                            else
-                            {
-                                P_max = P_stby * redundancy_n;
+                                P_max= (redundancy_k / redundancy_n) * NumberOfItems * P_stby * (1 + maturity_margin / 100);
                             }
                         }
-                        else
+                        
+                        if (Double.IsNaN(P_max))
                         {
-                            P_max = P_stby * NumberOfItems;
+                        	P_max = NumberOfItems * P_stby * (1 + maturity_margin / 100);
                         }
                     }
                     else
                     {
                         if (redundancy_type == "External")
                         {
-                            if (passiveList.Contains(redundancy_scheme))
+                            if (redundancy_scheme == "Cold")
                             {
-                                P_max = P_on * redundancy_k;
+                                P_max= (redundancy_k / redundancy_n) * NumberOfItems  * P_on * (1 + maturity_margin / 100);
                             }
-                            else
+                            else if (redundancy_scheme == "Standby")
                             {
-                                P_max = P_on * redundancy_n;
+                                P_max = ((redundancy_k / redundancy_n) * NumberOfItems  * P_on) + (((redundancy_n - redundancy_k) / redundancy_n) *  NumberOfItems * P_stby) * (1 + maturity_margin / 100);
                             }
                         }
-                        else
+                        
+                        if (Double.IsNaN(P_max))
                         {
-                            P_max = P_on * NumberOfItems;
+                            P_max = NumberOfItems * P_on * (1 + maturity_margin / 100);
                         }
                     }
                 }
@@ -318,7 +311,7 @@ public class MyDataSource : OptionDependentDataCollector
                 row["P_max" + state] = P_max;
             }
         }
-
+        
         return resultDataSource;
     }
 }
@@ -351,6 +344,9 @@ public class RowRepresentation : DataCollectorRow
 
     [DefinedThingShortName("n_items")]
     public DataCollectorDoubleParameter<RowRepresentation> parameterNumberOfItems { get; set; }
+
+    [DefinedThingShortName("maturity_margin")]
+    public DataCollectorDoubleParameter<RowRepresentation> parameterMaturityMargin { get; set; }
 
     /// <summary>
     /// The Category classes.

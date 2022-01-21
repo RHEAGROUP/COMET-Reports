@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 // <copyright file="DataSource.cs" company="RHEA System S.A.">
-//    Copyright (c) 2015-2021 RHEA System S.A.
+//    Copyright (c) 2015-2022 RHEA System S.A.
 //
 //    Author: Alexander van Delft, Sam Gerené, Alex Vorobiev
 //
@@ -20,7 +20,7 @@
 //    along with this program; if not, write to the Free Software Foundation,
 //    Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 
 /// <summary>
 /// the using statements needed for all code to work
@@ -195,6 +195,9 @@ public class RowRepresentation : DataCollectorRow
 
     [DefinedThingShortName("n_items")]
     public DataCollectorDoubleParameter<RowRepresentation> parameterNumberOfItems { get; set; }
+
+    [DefinedThingShortName("maturity_margin")]
+    public DataCollectorDoubleParameter<RowRepresentation> parameterMaturityMargin { get; set; }
 
     /// <summary>
     /// The Category classes.
